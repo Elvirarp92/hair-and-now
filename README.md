@@ -41,3 +41,12 @@ A web browser appointment scheduling app for salons, hairdressers and barbers. M
 | POST       | /api/postnewcomment/:salonId   | Creates a new comment, associated to a specific salon |
 | POST       | /api/editcomment/:commentId    | Updates an existing comment                           |
 | POST       | /api/deletecomment/:commentId  | Deletes an existing comment                           |
+
+## Client routes
+| **Route**   | **Description**                                                                                    |
+|-------------|----------------------------------------------------------------------------------------------------|
+| /salons     | Map with closest salons + search form                                                              |
+| /salons/:id | Detail view of a specific salon. Includes ratings module, comments and appointment scheduling form |
+| /signup     | User creation form                                                                                 |
+| /login      | Login form                                                                                         |
+| /dashboard  | Access to dashboard: appointment validation, salon detail edition (for professional accounts), etc.|
