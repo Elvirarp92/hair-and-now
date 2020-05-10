@@ -3,7 +3,7 @@ const router = express.Router
 
 
 //READ
-router.get('/getclientappts/:userId', (req, res, next) => {
+router.get('/getclientappts/:clientId', (req, res, next) => {
   /*WIP*/
 })
 
