@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router
 
-
 //READ
-router.get('/getallsalons', (req, res, next) => {
+router.get('/getsalons/search', (req, res, next) => {
   /*WIP*/
 })
 
