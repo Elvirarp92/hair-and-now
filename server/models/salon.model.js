@@ -56,6 +56,7 @@ const salonSchema = new Schema(
       },
     },
     services: { type: [Schema.Types.ObjectId], ref: 'Service' },
+    packs: { type: [Schema.Types.ObjectId], ref: 'Pack' },
     rating: Number,
     socialMediaHandles: { type: Map, of: String },
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
