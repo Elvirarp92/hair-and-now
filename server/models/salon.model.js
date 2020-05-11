@@ -9,44 +9,47 @@ const salonSchema = new Schema(
       enum: ['peluquería de señoras', 'barbería', 'peluquería unisex', 'otro'],
       required: true,
     },
-    street: { type: String, required: true },
-    addressNumber: { type: Number, required: true },
-    zipcode: { type: Number, required: true },
-    town: { type: String, required: true },
-    province: { type: String, required: true },
-    addressComplements: String,
+    address: {
+      street: { type: String, required: true },
+      number: { type: Number, required: true },
+      zipcode: { type: Number, required: true },
+      town: { type: String, required: true },
+      province: { type: String, required: true },
+      complements: String,
+    },
+
     schedule: {
-      "monday": {
+      monday: {
         openingDay: Boolean,
         openingTime: String,
         closingTime: String,
       },
-      "tuesday":{
+      tuesday: {
         openingDay: Boolean,
         openingTime: String,
         closingTime: String,
       },
-      "wednesday":{
+      wednesday: {
         openingDay: Boolean,
         openingTime: String,
         closingTime: String,
       },
-      "thursday":{
+      thursday: {
         openingDay: Boolean,
         openingTime: String,
         closingTime: String,
       },
-      "friday":{
+      friday: {
         openingDay: Boolean,
         openingTime: String,
         closingTime: String,
       },
-      "saturday":{
+      saturday: {
         openingDay: Boolean,
         openingTime: String,
         closingTime: String,
       },
-      "sunday":{
+      sunday: {
         openingDay: Boolean,
         openingTime: String,
         closingTime: String,
