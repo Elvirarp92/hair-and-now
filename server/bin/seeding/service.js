@@ -5,8 +5,8 @@ module.exports = [
     entities: [
       { refName: 'lavado', data: { name: 'Lavado', estimatedTime: 15 } },
       {
-        refName: 'peinado',
-        data: { name: 'Peinado', estimatedTime: 20 },
+        refName: 'peinadoCab',
+        data: { name: 'Peinado Caballero', estimatedTime: 20 },
       },
       {
         refName: 'corteClasicoCab',
@@ -29,7 +29,7 @@ module.exports = [
       },
       {
         refName: 'peinadoSra',
-        data: { name: 'Peinado', estimatedTime: 20 },
+        data: { name: 'Peinado Señora', estimatedTime: 20 },
       },
       {
         refName: 'recogido',

@@ -51,7 +51,50 @@ module.exports = [
               openingDay: false,
             },
           },
-          packs: [],
+          packs: [
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.corteTendenciaCab._id,
+                refs.services.peinadoCab._id,
+              ],
+              price: 19.5,
+            },
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.corteClasicoCab._id,
+                refs.services.peinadoCab._id,
+              ],
+              price: 17.5,
+            },
+            {
+              services: [refs.services.afeitadoNavaja._id],
+              price: 19,
+            },
+            {
+              services: [refs.services.arregloBarba._id],
+              price: 15.5,
+            },
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.corteClasicoCab._id,
+                refs.services.peinadoCab._id,
+                refs.services.arregloBarba._id,
+              ],
+              price: 34.5,
+            },
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.corteClasicoCab._id,
+                refs.services.peinadoCab._id,
+                refs.services.afeitadoNavaja._id,
+              ],
+              price: 39.5,
+            },
+          ],
           rating: 8.5,
           socialMediaHandles: {
             facebook: faker.internet.userName(),
@@ -136,7 +179,58 @@ module.exports = [
               openingDay: false,
             },
           },
-          packs: [],
+          packs: [
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.corteSra._id,
+                refs.services.peinadoSra._id,
+              ],
+              price: 25,
+            },
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.corteSra._id,
+                refs.services.recogido._id,
+              ],
+              price: 35,
+            },
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.tinteSra._id,
+                refs.services.peinadoSra._id,
+              ],
+              price: 49,
+            },
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.corteSra._id,
+                refs.services.tinteSra._id,
+                refs.services.peinadoSra._id,
+              ],
+              price: 58,
+            },
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.mechasSra._id,
+                refs.services.peinadoSra._id,
+              ],
+              price: 56,
+            },
+            {
+              services: [
+                refs.services.lavado._id,
+                refs.services.corteSra._id,
+                refs.services.mechasSra._id,
+                refs.services.peinadoSra._id,
+              ],
+              price: 65,
+            },
+          ],
           rating: 6.8,
           socialMediaHandles: {
             facebook: faker.internet.userName(),
@@ -200,43 +294,43 @@ module.exports = [
           packs: [
             {
               services: [
-                { name: 'Lavado', estimatedTime: 10 },
-                { name: 'Corte señora', price: 15, estimatedTime: 30 },
-                { name: 'Peinado', price: 16, estimatedTime: 20 },
+                refs.services.lavado._id,
+                refs.services.corteSra._id,
+                refs.services.peinadoSra._id,
               ],
               price: 25,
             },
             {
               services: [
-                { name: 'Lavado', estimatedTime: 10 },
-                { name: 'Tinte', price: 49, estimatedTime: 90 },
-                { name: 'Peinado', price: 16, estimatedTime: 20 },
+                refs.services.lavado._id,
+                refs.services.tinteSra._id,
+                refs.services.peinadoSra._id,
               ],
               price: 49,
             },
             {
               services: [
-                { name: 'Lavado', estimatedTime: 10 },
-                { name: 'Corte señora', price: 15, estimatedTime: 30 },
-                { name: 'Tinte', price: 49, estimatedTime: 90 },
-                { name: 'Peinado', price: 16, estimatedTime: 20 },
+                refs.services.lavado._id,
+                refs.services.corteSra._id,
+                refs.services.tinteSra._id,
+                refs.services.peinadoSra._id,
               ],
               price: 58,
             },
             {
               services: [
-                { name: 'Lavado', estimatedTime: 10 },
-                { name: 'Mechas', price: 56, estimatedTime: 60 },
-                { name: 'Peinado', price: 16, estimatedTime: 20 },
+                refs.services.lavado._id,
+                refs.services.mechasSra._id,
+                refs.services.peinadoSra._id,
               ],
               price: 56,
             },
             {
               services: [
-                { name: 'Lavado', estimatedTime: 10 },
-                { name: 'Corte señora', price: 15, estimatedTime: 30 },
-                { name: 'Mechas', price: 56, estimatedTime: 60 },
-                { name: 'Peinado', price: 16, estimatedTime: 20 },
+                refs.services.lavado._id,
+                refs.services.corteSra._id,
+                refs.services.mechasSra._id,
+                refs.services.peinadoSra._id,
               ],
               price: 65,
             },
