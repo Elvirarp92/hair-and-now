@@ -15,8 +15,43 @@ const salonSchema = new Schema(
     town: { type: String, required: true },
     province: { type: String, required: true },
     addressComplements: String,
-    openingTime: String,
-    closingTime: String,
+    schedule: {
+      "monday": {
+        openingDay: Boolean,
+        openingTime: String,
+        closingTime: String,
+      },
+      "tuesday":{
+        openingDay: Boolean,
+        openingTime: String,
+        closingTime: String,
+      },
+      "wednesday":{
+        openingDay: Boolean,
+        openingTime: String,
+        closingTime: String,
+      },
+      "thursday":{
+        openingDay: Boolean,
+        openingTime: String,
+        closingTime: String,
+      },
+      "friday":{
+        openingDay: Boolean,
+        openingTime: String,
+        closingTime: String,
+      },
+      "saturday":{
+        openingDay: Boolean,
+        openingTime: String,
+        closingTime: String,
+      },
+      "sunday":{
+        openingDay: Boolean,
+        openingTime: String,
+        closingTime: String,
+      },
+    },
     services: { type: [Schema.Types.ObjectId], ref: 'Service' },
     rating: Number,
     socialMediaHandles: { type: Map, of: String },
