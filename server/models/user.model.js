@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const userSchema = new Schema(
   {
     username: { type: String, required: true },
-    password: { type: String, required: true },
+    password: String,
     email: { type: String, required: true },
     status: {
       type: String,
@@ -17,7 +17,6 @@ const userSchema = new Schema(
       enum: ['client', 'professional'],
       default: 'client',
     },
-    businesses: { type: [Schema.Types.ObjectId], ref: 'Salon' },
     appointments: { type: [Schema.Types.ObjectId], ref: 'Appointment' },
   },
   {

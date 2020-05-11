@@ -4,7 +4,6 @@ const Schema = mongoose.Schema
 const commentSchema = new Schema(
   {
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
-    associatedSalon: { type: Schema.Types.ObjectId, ref: 'Salon' },
     title: String,
     text: String,
   },

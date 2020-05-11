@@ -55,7 +55,6 @@ const salonSchema = new Schema(
         closingTime: String,
       },
     },
-    services: { type: [Schema.Types.ObjectId], ref: 'Service' },
     packs: { type: [Schema.Types.ObjectId], ref: 'Pack' },
     rating: Number,
     socialMediaHandles: { type: Map, of: String },
@@ -63,6 +62,7 @@ const salonSchema = new Schema(
     photos: Array,
     posts: { type: [Schema.Types.ObjectId], ref: 'Post' },
     comments: { type: [Schema.Types.ObjectId], ref: 'Comment' },
+    appointments: { type: [Schema.Types.ObjectId], ref: 'Appointment' },
   },
   { timestamps: true }
 )
