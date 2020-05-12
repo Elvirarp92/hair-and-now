@@ -6,6 +6,7 @@ const mongoUrl = `mongodb://localhost/${process.env.DB}`
 const colonization = colonize.initialize({
   mongoUrl,
   seedingPath: path.resolve(__dirname),
+  dropDatabase: true,
   connectionWhitelist: [mongoUrl],
 })
 

@@ -6,14 +6,17 @@ const nodemailer = require('nodemailer')
 
 const { v4: uuidv4 } = require('uuid')
 
-
 const User = require('./../models/user.model')
 
 let transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
+    type: 'OAuth2',
     user: process.env.EMAIL,
-    password: process.env.PASSWORD,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: process.env.REFRESH_TOKEN,
+    accessToken: process.env.ACCESS_TOKEN,
   },
 })
 
@@ -36,82 +39,81 @@ router.post('/signup', (req, res, next) => {
     return
   }
 
-  User.findOne({ username }, (err, foundUser) => {
+  User.findOne({ $or: [{ username }, { email }] }, (err, foundUser) => {
     if (err) {
-      res.status(500).json({ message: 'Username check went bad.' })
+      res.status(500).json({ message: 'Username/email check went bad.' })
       return
     }
 
     if (foundUser) {
-      res.status(400).json({ message: 'Username taken. Choose another one.' })
-      return
-    }
-  })
-
-  User.findOne({ email }, (err, foundUser) => {
-    if (err) {
-      res.status(500).json({ message: 'Email check went bad.' })
+      res
+        .status(400)
+        .json({ message: 'Username or email taken. Choose another one(s).' })
       return
     }
 
-    if (foundUser) {
-      res.status(400).json({ message: 'Email taken. Choose another one.' })
-      return
-    }
-  })
+    const hmac = crypto.createHmac('sha512', process.env.CRYPTOKEY1)
+    hmac.update(password)
 
-  const hmac = crypto.createHmac('sha512', process.env.CRYPTOKEY1)
-  hmac.update(password)
-
-  //PENDING NODEMAILER
-
-  User.create({
-    username: username,
-    password: hmac.digest('base64'),
-    keyId: 1,
-    email: email,
-    role: role,
-    confirmationCode: uuidv4(),
-    status: 'pending confirmation',
-  })
-    .then((user) => {
-      if (user.role == 'client') {
-        transporter.sendMail({
-          from: process.env.EMAIL,
-          to: user.email,
-          subject: 'Confirma tu registro a Hair&Now ☑️',
-          text: `Para poder acceder a Hair&Now con tu usuario y contraseña, 
+    User.create({
+      username: username,
+      password: hmac.digest('base64'),
+      keyId: 1,
+      email: email,
+      role: role,
+      confirmationCode: uuidv4(),
+      status: 'pending confirmation',
+    })
+      .then((user) => {
+        if (user.role == 'client') {
+          transporter.sendMail({
+            from: process.env.EMAIL,
+            to: user.email,
+            subject: 'Confirma tu registro a Hair&Now ☑️',
+            text: `Para poder acceder a Hair&Now con tu usuario y contraseña, 
       por favor, confirma tu registro en el siguiente 
       enlace: http://localhost:5000/api/confirm/${user.confirmationCode}`,
-          html: `<p>Para poder acceder a LabExpress con tu usuario y contraseña, 
+            html: `<p>Para poder acceder a LabExpress con tu usuario y contraseña, 
       por favor, confirma tu registro en 
       <a href="http://localhost:5000/api/confirm/${user.confirmationCode}">
       el siguiente enlace.</a></p>`,
-        })
-      }
-    })
-    .then((user) => {
-      res.status(200).json(user)
-    })
-    .catch((err) => {
-      res.status(400).json({ message: 'Saving user to database went wrong.' })
-    })
+          })
+        }
+      })
+      .then((user) => {
+        res.status(200).json(user)
+        return
+      })
+      .catch((err) => {
+        res.status(400).json({ message: 'Saving user to database went wrong.' })
+        return
+      })
+  })
 })
 
 //User confirmation
 router.get('/confirm/:confirmCode', (req, res, next) => {
   User.findOneAndUpdate(
-    { confirmationCode: req.params.confirmationCode },
+    { confirmationCode: req.params.confirmCode },
     { status: 'active' }
   )
     .then((user) => {
-      req.login(user)
-    })
-    .then((user) => {
-      res.status(200).json(user)
+      console.log(user)
+      req.login(user, (err) => {
+        if (err) {
+          console.log(err)
+          res.status(500).json({ message: 'Session save went bad.' })
+          return
+        }
+
+        res.status(200).json(user)
+      })
     })
     .catch((err) => {
-      res.status(500).json({ message: 'Login after signup went bad.' })
+      console.log(err)
+      res
+        .status(500)
+        .json({ message: 'Something went wrong while updating the user.' })
     })
 })
 
