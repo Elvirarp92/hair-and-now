@@ -5,6 +5,8 @@ const userSchema = new Schema(
   {
     username: { type: String, required: true },
     password: String,
+    keyId: Number, /*this allows us to have several keys available for hashing at a time - we do not 
+    at the moment, but now our program is more scalable!*/
     email: { type: String, required: true },
     status: {
       type: String,
