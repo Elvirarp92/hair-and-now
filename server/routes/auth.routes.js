@@ -1,10 +1,11 @@
 const express = require('express')
-const router = express.Router
+const router = express.Router()
 const passport = require('passport')
 const crypto = require('crypto')
 const nodemailer = require('nodemailer')
 
-import { v4 as uuidv4 } from 'uuid'
+const { v4: uuidv4 } = require('uuid')
+
 
 const User = require('./../models/user.model')
 

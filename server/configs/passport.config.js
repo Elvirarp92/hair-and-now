@@ -1,5 +1,4 @@
 const session = require("express-session")
-const bcrypt = require("bcrypt")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const flash = require("connect-flash")
@@ -31,7 +30,7 @@ module.exports = app => {
                 if (!user) {
                     return next(null, false, { message: "Nombre de usuario incorrecto" })
                 }
-                if (!bcrypt.compareSync(password, user.password)) {
+                if (password != user.password) {
                     return next(null, false, { message: "Contraseña incorrecta" })
                 }
                 return next(null, user)
