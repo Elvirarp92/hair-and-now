@@ -25,7 +25,7 @@ module.exports = [
             refs.services.lavado._id,
             refs.services.corteTendenciaCab._id,
           ],
-          date: [faker.date.recent(), faker.date.recent(), faker.date.recent()],
+          date: [faker.date.recent(3), faker.date.recent(3), faker.date.recent(3)],
           validated: false,
         },
       },
