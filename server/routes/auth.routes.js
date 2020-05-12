@@ -123,8 +123,13 @@ router.post('/logout', (req, res, next) => {
   res.status(200).json({ message: 'Log out success!' })
 })
 
+//checks whether there's a logged in user in this browser session
 router.get('/isloggedin', (req, res, next) => {
-  /*WIP*/
+  if (req.isAuthenticated()) {
+    res.status(200).json(req.user)
+    return
+  }
+  res.status(403).json({ message: 'Unauthorized' })
 })
 
 module.exports = router
