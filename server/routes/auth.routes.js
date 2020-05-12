@@ -98,10 +98,8 @@ router.get('/confirm/:confirmCode', (req, res, next) => {
     { status: 'active' }
   )
     .then((user) => {
-      console.log(user)
       req.login(user, (err) => {
         if (err) {
-          console.log(err)
           res.status(500).json({ message: 'Session save went bad.' })
           return
         }
@@ -110,7 +108,6 @@ router.get('/confirm/:confirmCode', (req, res, next) => {
       })
     })
     .catch((err) => {
-      console.log(err)
       res
         .status(500)
         .json({ message: 'Something went wrong while updating the user.' })
