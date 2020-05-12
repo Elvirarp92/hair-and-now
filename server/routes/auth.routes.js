@@ -115,7 +115,26 @@ router.get('/confirm/:confirmCode', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
-  /*WIP*/
+  console.log(req.body)
+  passport.authenticate('local', (err, user, failureDetails) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ message: 'Something went wrong on user authentication.' })
+      return
+    }
+    if (!user) {
+      res.status(401).json(failureDetails)
+      return
+    }
+
+    req.login(user, (err) => {
+      if (err) {
+        res.status(500).json({ message: 'Session save went bad.' })
+      }
+      res.status(200).json(user)
+    })
+  })(req, res, next);
 })
 
 router.post('/logout', (req, res, next) => {
