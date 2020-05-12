@@ -2,7 +2,7 @@ const faker = require('faker')
 faker.locale = 'es'
 
 module.exports = [
-  () => ({
+  (refs) => ({
     model: () => require('./../../models/salon.model'),
     refName: 'salons',
     entities: [
@@ -10,7 +10,7 @@ module.exports = [
         refName: 'firstBarbershop',
         data: {
           name: faker.company.companyName(),
-          type: 'Barbería',
+          type: 'barbería',
           address: {
             street: 'Avenida José Laguillo',
             number: 27,
@@ -52,48 +52,12 @@ module.exports = [
             },
           },
           packs: [
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteTendenciaCab._id,
-                refs.services.peinadoCab._id,
-              ],
-              price: 19.5,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteClasicoCab._id,
-                refs.services.peinadoCab._id,
-              ],
-              price: 17.5,
-            },
-            {
-              services: [refs.services.afeitadoNavaja._id],
-              price: 19,
-            },
-            {
-              services: [refs.services.arregloBarba._id],
-              price: 15.5,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteClasicoCab._id,
-                refs.services.peinadoCab._id,
-                refs.services.arregloBarba._id,
-              ],
-              price: 34.5,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteClasicoCab._id,
-                refs.services.peinadoCab._id,
-                refs.services.afeitadoNavaja._id,
-              ],
-              price: 39.5,
-            },
+            refs.packs.barber1tendencia._id,
+            refs.packs.barber1clasico._id,
+            refs.packs.barber1afeitado._id,
+            refs.packs.barber1barba._id,
+            refs.packs.barber1clasicoybarba._id,
+            refs.packs.barber1clasicoyafeitado._id,
           ],
           rating: 8.5,
           socialMediaHandles: {
@@ -101,30 +65,8 @@ module.exports = [
             twitter: `@${faker.internet.userName()}`,
           },
           owner: refs.users.firstBarbershopOwner._id,
-          posts: [
-            {
-              owner: refs.users.firstBarbershopOwner._id,
-              title: faker.lorem.word(),
-              text: faker.lorem.paragraph(),
-              comments: [
-                {
-                  owner: refs.users.serialCommenter._id,
-                  title: faker.lorem.word(),
-                  text: faker.lorem.paragraph(),
-                },
-                {
-                  owner: refs.users.anotherCommenter._id,
-                  title: faker.lorem.word(),
-                  text: faker.lorem.paragraph(),
-                },
-              ],
-            },
-          ],
-          comments: {
-            owner: refs.users.serialCommenter._id,
-            title: faker.lorem.word(),
-            text: faker.lorem.paragraph(),
-          },
+          posts: [refs.posts.barberPost._id],
+          comments: [refs.comments.barberDirectComment1._id],
           appointments: [
             refs.appointments.barberAppt1._id,
             refs.appointments.barberAppt2._id,
@@ -135,7 +77,7 @@ module.exports = [
         refName: 'firstSalon',
         data: {
           name: faker.company.companyName(),
-          type: 'Peluquería de señoras',
+          type: 'peluquería de señoras',
           address: {
             street: 'Calle Urquiza',
             number: 3,
@@ -180,56 +122,12 @@ module.exports = [
             },
           },
           packs: [
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 25,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteSra._id,
-                refs.services.recogido._id,
-              ],
-              price: 35,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.tinteSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 49,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteSra._id,
-                refs.services.tinteSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 58,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.mechasSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 56,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteSra._id,
-                refs.services.mechasSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 65,
-            },
+            refs.packs.salon1corteypeinado._id,
+            refs.packs.salon1recogido._id,
+            refs.packs.salon1tinte._id,
+            refs.packs.salon1corteytinte._id,
+            refs.packs.salon1mechas._id,
+            refs.packs.salon1corteymechas._id,
           ],
           rating: 6.8,
           socialMediaHandles: {
@@ -238,11 +136,7 @@ module.exports = [
             instagram: `@${faker.internet.userName()}`,
           },
           owner: refs.users.firstSalonOwner._id,
-          comments: {
-            owner: refs.users.serialCommenter._id,
-            title: faker.lorem.word(),
-            text: faker.lorem.paragraph(),
-          },
+          comments: [refs.comments.salonComment1._id],
           appointments: [refs.appointments.salonAppt1._id],
         },
       },
@@ -250,7 +144,7 @@ module.exports = [
         refName: 'secondSalon',
         data: {
           name: faker.company.companyName(),
-          type: 'Peluquería de señoras',
+          type: 'peluquería de señoras',
           address: {
             street: 'Calle Pérez Hervás',
             number: 7,
@@ -292,48 +186,12 @@ module.exports = [
             },
           },
           packs: [
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 25,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.tinteSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 49,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteSra._id,
-                refs.services.tinteSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 58,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.mechasSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 56,
-            },
-            {
-              services: [
-                refs.services.lavado._id,
-                refs.services.corteSra._id,
-                refs.services.mechasSra._id,
-                refs.services.peinadoSra._id,
-              ],
-              price: 65,
-            },
+            refs.packs.salon2corteypeinado._id,
+            refs.packs.salon2recogido._id,
+            refs.packs.salon2tinte._id,
+            refs.packs.salon2corteytinte._id,
+            refs.packs.salon2mechas._id,
+            refs.packs.salon2corteymechas._id,
           ],
           rating: 6.8,
           socialMediaHandles: {
@@ -342,11 +200,7 @@ module.exports = [
             instagram: `@${faker.internet.userName()}`,
           },
           owner: refs.users.secondSalonOwner._id,
-          comments: {
-            owner: refs.users.serialCommenter._id,
-            title: faker.lorem.word(),
-            text: faker.lorem.paragraph(),
-          },
+          comments: [refs.comments.salonComment2._id],
           appointments: [refs.appointments.salonAppt2._id],
         },
       },
