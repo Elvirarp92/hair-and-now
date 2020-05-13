@@ -33,9 +33,9 @@ router.post('/postnewcomment/:id', checkLoggedIn, (req, res, next) => {
 })
 
 //UPDATE
-router.post('/editcomment/:commentId', (req, res, next) => {
-  /*WIP*/
-})
+// router.post('/editcomment/:commentId', (req, res, next) => {
+//   /*WIP*/
+// })
 
 //DELETE
 router.post('/deletecomment/:commentId', (req, res, next) => {
