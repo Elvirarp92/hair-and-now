@@ -10,12 +10,18 @@ router.get('/getsalons/search', (req, res, next) => {
       res.json(salons)
     })
     .catch((err) => {
-      console.log(err)
+      next(new Error(err))
     })
 })
 
 router.get('/getsalon/:id', (req, res, next) => {
-  /*WIP*/
+  Salon.findById(req.params.id)
+    .then((salon) => {
+      res.json(salon)
+    })
+    .catch((err) => {
+      next(new Error(err))
+    })
 })
 
 //CREATE
