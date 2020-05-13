@@ -66,7 +66,6 @@ module.exports = [
           },
           owner: refs.users.firstBarbershopOwner._id,
           posts: [refs.posts.barberPost._id],
-          comments: [refs.comments.barberDirectComment1._id],
           appointments: [
             refs.appointments.barberAppt1._id,
             refs.appointments.barberAppt2._id,
@@ -136,7 +135,6 @@ module.exports = [
             instagram: `@${faker.internet.userName()}`,
           },
           owner: refs.users.firstSalonOwner._id,
-          comments: [refs.comments.salonComment1._id],
           appointments: [refs.appointments.salonAppt1._id],
         },
       },
@@ -200,7 +198,6 @@ module.exports = [
             instagram: `@${faker.internet.userName()}`,
           },
           owner: refs.users.secondSalonOwner._id,
-          comments: [refs.comments.salonComment2._id],
           appointments: [refs.appointments.salonAppt2._id],
         },
       },

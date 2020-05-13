@@ -12,6 +12,7 @@ module.exports = [
           owner: refs.users.serialCommenter._id,
           title: faker.lorem.word(),
           text: faker.lorem.paragraph(),
+          postedInPost: refs.posts.barberPost._id,
         },
       },
       {
@@ -20,6 +21,7 @@ module.exports = [
           owner: refs.users.anotherCommenter._id,
           title: faker.lorem.word(),
           text: faker.lorem.paragraph(),
+          postedInPost: refs.posts.barberPost._id,
         },
       },
       {
@@ -28,6 +30,7 @@ module.exports = [
           owner: refs.users.serialCommenter._id,
           title: faker.lorem.word(),
           text: faker.lorem.paragraph(),
+          postedInSalon: refs.salons.firstBarbershop._id
         },
       },
       {
@@ -36,6 +39,7 @@ module.exports = [
           owner: refs.users.serialCommenter._id,
           title: faker.lorem.word(),
           text: faker.lorem.paragraph(),
+          postedInSalon: refs.salons.firstSalon._id
         },
       },
       {
@@ -44,6 +48,7 @@ module.exports = [
           owner: refs.users.serialCommenter._id,
           title: faker.lorem.word(),
           text: faker.lorem.paragraph(),
+          postedInSalon: refs.salons.secondSalon._id
         },
       },
     ],

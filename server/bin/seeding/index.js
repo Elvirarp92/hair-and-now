@@ -10,8 +10,8 @@ module.exports = [
   { service },
   { appointment },
   { user },
-  { comment },
   { post },
   { pack },
   { salon },
+  { comment },
 ]

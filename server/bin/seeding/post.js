@@ -12,10 +12,6 @@ module.exports = [
           owner: refs.users.firstBarbershopOwner._id,
           title: faker.lorem.word(),
           text: faker.lorem.paragraph(),
-          comments: [
-            refs.comments.barberPostComment1._id,
-            refs.comments.barberPostComment2._id,
-          ],
         },
       },
     ],

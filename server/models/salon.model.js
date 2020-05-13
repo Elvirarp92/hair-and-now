@@ -61,7 +61,6 @@ const salonSchema = new Schema(
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     photos: Array,
     posts: { type: [Schema.Types.ObjectId], ref: 'Post' },
-    comments: { type: [Schema.Types.ObjectId], ref: 'Comment' },
     appointments: { type: [Schema.Types.ObjectId], ref: 'Appointment' },
   },
   { timestamps: true }

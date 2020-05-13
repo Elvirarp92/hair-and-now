@@ -6,7 +6,6 @@ const postSchema = new Schema(
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     title: String,
     text: String,
-    comments: { type: [Schema.Types.ObjectId], ref: 'Comment' },
   },
   { timestamps: true }
 )
