@@ -31,15 +31,12 @@ module.exports = (app) => {
         console.log(username)
         User.findOne({ username })
           .then((user) => {
-            console.log(`usuario: ${user} cuyo nombre: ${user.username} y contraseña ${user.password}`)
             const cipheredPassword = crypto.createHmac(
               'sha512',
               process.env.CRYPTOKEY1
             )
             cipheredPassword.update(password)
             const digestedPassword = cipheredPassword.digest('base64')
-
-            console.log(`contraseña cifrada: ${digestedPassword}`)
 
             if (!user) {
               return next(null, false, {
