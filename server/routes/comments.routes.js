@@ -19,7 +19,7 @@ router.get('/getcomments/:id', (req, res, next) => {
 //CREATE
 router.post('/postnewcomment/:id', checkLoggedIn, (req, res, next) => {
   const commentBody = {
-    owner: req.user._id,
+    owner: req.user.id,
     title: req.body.title,
     text: req.body.text,
     postedIn: req.params.id,
