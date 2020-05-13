@@ -36,7 +36,13 @@ router.post('/editsalon/:id', (req, res, next) => {
 
 //DELETE
 router.post('/deletesalon/:id', (req, res, next) => {
-  /*WIP*/
+  Salon.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.json({ message: `Salon document ${req.params.id} deleted!` })
+    })
+    .catch((err) => {
+      next(new Error(err))
+    })
 })
 
 module.exports = router
