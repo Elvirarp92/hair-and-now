@@ -1,25 +1,15 @@
 const express = require('express')
 const router = express.Router()
 
-const Salon = require('./../models/salon.model')
-const Post = require('./../models/post.model')
 const Comment = require('./../models/comment.model')
 
-//READ
-router.get('/getsaloncomments/:salonId', (req, res, next) => {
-  Salon.findById(req.params.salonId)
-    .then((salon) => {
-      res.json(salon.comments)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
-})
+const { checkLoggedIn, checkRole } = require('./../configs/authCheckers.config')
 
-router.get('/getpostcomments/:postId', (req, res, next) => {
-  Post.findById(req.params.postId)
-    .then((post) => {
-      res.json(post.comments)
+//READ
+router.get('/getcomments/:id', (req, res, next) => {
+  Comment.find({ postedIn: req.params.id })
+    .then((comments) => {
+      res.json(comments)
     })
     .catch((err) => {
       next(new Error(err))
@@ -27,8 +17,19 @@ router.get('/getpostcomments/:postId', (req, res, next) => {
 })
 
 //CREATE
-router.post('/postnewcomment/:salonId', (req, res, next) => {
-  /*WIP*/
+router.post('/postnewcomment/:id', checkLoggedIn, (req, res, next) => {
+  const commentBody = {
+    owner: req.user._id,
+    title: req.body.title,
+    text: req.body.text,
+    postedIn: req.params.id,
+  }
+
+  Comment.create(commentBody)
+    .then((comment) => {
+      res.json(comment)
+    })
+    .catch((err) => {})
 })
 
 //UPDATE
