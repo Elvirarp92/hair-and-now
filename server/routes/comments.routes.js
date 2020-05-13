@@ -29,7 +29,9 @@ router.post('/postnewcomment/:id', checkLoggedIn, (req, res, next) => {
     .then((comment) => {
       res.json(comment)
     })
-    .catch((err) => {})
+    .catch((err) => {
+      next(new Error(err))
+    })
 })
 
 //UPDATE
@@ -38,8 +40,22 @@ router.post('/postnewcomment/:id', checkLoggedIn, (req, res, next) => {
 // })
 
 //DELETE
-router.post('/deletecomment/:commentId', (req, res, next) => {
-  /*WIP*/
+router.post('/deletecomment/:id', checkLoggedIn, (req, res, next) => {
+  Comment.findById(req.params.id)
+    .then((comment) => {
+      return comment.owner == req.user.id
+        ? comment._id
+        : res.status(403).json({
+            message: `You do not have permissions to delete this comment`,
+          })
+    })
+    .then((commentId) => {
+      return Comment.findByIdAndDelete(commentId)
+    })
+    .then(() => res.status(200).json({ message: 'Deletion was successful!' }))
+    .catch((err) => {
+      next(new Error(err))
+    })
 })
 
 module.exports = router

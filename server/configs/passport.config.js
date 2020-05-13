@@ -28,7 +28,6 @@ module.exports = (app) => {
     new LocalStrategy(
       { passReqToCallback: true },
       (req, username, password, next) => {
-        console.log(username)
         User.findOne({ username })
           .then((user) => {
             const cipheredPassword = crypto.createHmac(

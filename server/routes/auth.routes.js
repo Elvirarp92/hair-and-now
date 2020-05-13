@@ -115,7 +115,6 @@ router.get('/confirm/:confirmCode', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
-  console.log(req.body)
   passport.authenticate('local', (err, user, failureDetails) => {
     if (err) {
       res
