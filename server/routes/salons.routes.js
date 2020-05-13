@@ -1,9 +1,17 @@
 const express = require('express')
 const router = express.Router()
 
+const Salon = require('./../models/salon.model')
+
 //READ
 router.get('/getsalons/search', (req, res, next) => {
-  /*WIP*/
+  Salon.find(req.query)
+    .then((salons) => {
+      res.json(salons)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 })
 
 router.get('/getsalon/:id', (req, res, next) => {
