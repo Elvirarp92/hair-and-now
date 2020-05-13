@@ -1,23 +1,33 @@
 const express = require('express')
 const router = express.Router()
 
+const Appointment = require('./../models/appointment.model')
+const User = require('./../models/user.model')
 
 //READ
-router.get('/getclientappts/:clientId', (req, res, next) => {
-  /*WIP*/
-})
-
-router.get('/getsalonappts/:salonId', (req, res, next) => {
-  /*WIP*/
+router.get('/getuserappts/:id', (req, res, next) => {
+  User.findById(req.params.id)
+  .then((client) => {
+    res.json(client.appointments)
+  }).catch((err) => {
+    next(new Error(err))
+  });
 })
 
 router.get('/getappt/:id', (req, res, next) => {
-  /*WIP*/
+  Appointment.findById(req.params.id)
+  .then((appointment) => {
+    res.json(appointment)
+  }).catch((err) => {
+    next(new Error(err))
+  });
 })
 
 //CREATE
 router.post('/postnewappt', (req, res, next) => {
-  /*WIP*/
+  /*WIP
+  Appt creado debe ser añadido a usuario logado y a peluquería seleccionada
+  */
 })
 
 //UPDATE
