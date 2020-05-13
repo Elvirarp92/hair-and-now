@@ -38,7 +38,13 @@ router.post('/postnewsalon', (req, res, next) => {
 
 //UPDATE
 router.post('/editsalon/:id', (req, res, next) => {
-  /*WIP*/
+  Salon.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((salon) => {
+      res.json(salon)
+    })
+    .catch((err) => {
+      next(new Error(err))
+    })
 })
 
 //DELETE
