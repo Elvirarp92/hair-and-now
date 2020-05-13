@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
+const { checkLoggedIn, checkRole } = require('./../configs/authCheckers.config')
+
 const Salon = require('./../models/salon.model')
 
 //READ
@@ -25,8 +27,22 @@ router.get('/getsalon/:id', (req, res, next) => {
 })
 
 //CREATE
-router.post('/postnewsalon', (req, res, next) => {
-  Salon.create(req.body)
+router.post('/postnewsalon', checkRole(['professional']), (req, res, next) => {
+  newSalon = {
+    name: req.body.name,
+    type: req.body.type,
+    address: {
+      street: req.body.street,
+      number: req.body.addressNumber,
+      zipcode: req.body.zipcode,
+      town: req.body.town,
+      province: req.body.province,
+      complements: req.body.addressComplements,
+    },
+    owner: req.user.id,
+  }
+
+  Salon.create(newSalon)
     .then((salon) => {
       res.json(salon)
     })
@@ -37,8 +53,18 @@ router.post('/postnewsalon', (req, res, next) => {
 })
 
 //UPDATE
-router.post('/editsalon/:id', (req, res, next) => {
-  Salon.findByIdAndUpdate(req.params.id, req.body, { new: true })
+router.post('/editsalon/:id', checkLoggedIn, (req, res, next) => {
+  Salon.findById(req.params.id)
+    .then((salon) =>
+      salon.owner == req.user.id
+        ? salon._id
+        : res.status(403).json({
+            message: `You do not have permissions to edit this salon`,
+          })
+    )
+    .then((salonId) =>
+      Salon.findByIdAndUpdate(salonId, req.body, { new: true })
+    )
     .then((salon) => {
       res.json(salon)
     })
@@ -48,8 +74,16 @@ router.post('/editsalon/:id', (req, res, next) => {
 })
 
 //DELETE
-router.post('/deletesalon/:id', (req, res, next) => {
-  Salon.findByIdAndDelete(req.params.id)
+router.post('/deletesalon/:id', checkLoggedIn, (req, res, next) => {
+  Salon.findById(req.params.id)
+    .then((salon) =>
+      salon.owner == req.user.id
+        ? salon._id
+        : res.status(403).json({
+            message: `You do not have permissions to delete this salon`,
+          })
+    )
+    .then((salonId) => Salon.findByIdAndDelete(salonId))
     .then(() => {
       res.json({ message: `Salon document ${req.params.id} deleted!` })
     })

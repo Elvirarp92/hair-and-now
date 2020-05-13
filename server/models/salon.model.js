@@ -58,7 +58,7 @@ const salonSchema = new Schema(
     packs: { type: [Schema.Types.ObjectId], ref: 'Pack' },
     rating: Number,
     socialMediaHandles: { type: Map, of: String },
-    owner: { type: Schema.Types.ObjectId, ref: 'User' },
+    owner: String,
     photos: Array,
     posts: { type: [Schema.Types.ObjectId], ref: 'Post' },
     appointments: { type: [Schema.Types.ObjectId], ref: 'Appointment' },

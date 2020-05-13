@@ -3,7 +3,7 @@ const router = express.Router()
 
 const Comment = require('./../models/comment.model')
 
-const { checkLoggedIn, checkRole } = require('./../configs/authCheckers.config')
+const { checkLoggedIn } = require('./../configs/authCheckers.config')
 
 //READ
 router.get('/getcomments/:id', (req, res, next) => {
