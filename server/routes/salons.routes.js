@@ -26,7 +26,14 @@ router.get('/getsalon/:id', (req, res, next) => {
 
 //CREATE
 router.post('/postnewsalon', (req, res, next) => {
-  /*WIP*/
+  Salon.create(req.body)
+    .then((salon) => {
+      res.json(salon)
+    })
+    .catch((err) => {
+      console.log(err)
+      next(new Error(err))
+    })
 })
 
 //UPDATE
