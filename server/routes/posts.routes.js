@@ -4,7 +4,7 @@ const router = express.Router()
 const Salon = require('./../models/salon.model')
 const Post = require('./../models/post.model')
 
-const { checkLoggedIn, checkRole } = require('./../configs/authCheckers.config')
+const { checkRole } = require('./../configs/authCheckers.config')
 
 //READ
 router.get('/getsalonposts/:salonId', (req, res, next) => {
@@ -50,9 +50,13 @@ router.post(
         return Post.create(postObject)
       })
       .then((createdPost) => {
-        return Salon.findByIdAndUpdate(req.params.salonId, {$push: { posts: createdPost._id }}, {
-          new: true,
-        })
+        return Salon.findByIdAndUpdate(
+          req.params.salonId,
+          { $push: { posts: createdPost._id } },
+          {
+            new: true,
+          }
+        )
       })
       .then(() => res.json({ message: 'Your post was successfully created!' }))
       .catch((err) => {
@@ -62,8 +66,22 @@ router.post(
 )
 
 //UPDATE
-router.post('/editpost/:postId', (req, res, next) => {
-  /*WIP*/
+router.post('/editpost/:id', checkRole(['professional']), (req, res, next) => {
+  Post.findById(req.params.id)
+    .then((post) => {
+      return post.owner == req.user.id
+        ? post._id
+        : res.status(403).json({
+            message: `You do not have permissions to update this post`,
+          })
+    })
+    .then((postId) =>
+      Post.findByIdAndUpdate(postId, req.body, { new: true })
+    )
+    .then((post) => res.json(post))
+    .catch((err) => {
+      next(new Error(err))
+    })
 })
 
 //DELETE
