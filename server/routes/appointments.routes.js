@@ -48,7 +48,6 @@ router.post(
         })
       })
       .then(() => {
-        console.log(`appointment object: ${appointmentObject}`)
         return User.findByIdAndUpdate(req.user.id, {
           $push: { appointments: appointmentObject._id },
         })
