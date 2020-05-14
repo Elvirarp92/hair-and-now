@@ -1,7 +1,7 @@
 const checkLoggedIn = (req, res, next) =>
-  req.isAuthenticated()
+  req.isAuthenticated() && req.user.status == 'active'
     ? next()
-    : res.status(401).json({ message: 'You are not logged in' })
+    : res.status(401).json({ message: 'You are not logged in, or your account is not validated' })
 
 const checkRole = (roles) => (req, res, next) =>
   req.isAuthenticated() && roles.includes(req.user.role)

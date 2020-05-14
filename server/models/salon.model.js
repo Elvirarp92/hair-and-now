@@ -55,13 +55,13 @@ const salonSchema = new Schema(
         closingTime: String,
       },
     },
-    packs: { type: [Schema.Types.ObjectId], ref: 'Pack' },
+    packs: { type: [String] },
     rating: Number,
     socialMediaHandles: { type: Map, of: String },
     owner: String,
     photos: Array,
-    posts: { type: [Schema.Types.ObjectId], ref: 'Post' },
-    appointments: { type: [Schema.Types.ObjectId], ref: 'Appointment' },
+    posts: { type: [String] },
+    appointments: { type: [String] },
   },
   { timestamps: true }
 )
