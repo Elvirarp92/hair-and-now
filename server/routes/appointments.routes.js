@@ -5,7 +5,7 @@ const Appointment = require('./../models/appointment.model')
 const User = require('./../models/user.model')
 const Salon = require('./../models/salon.model')
 
-const { checkRole } = require('./../configs/authCheckers.config')
+const { checkLoggedIn, checkRole } = require('./../configs/authCheckers.config')
 
 //READ
 router.get('/getuserappts/:id', (req, res, next) => {
@@ -63,8 +63,33 @@ router.post(
 )
 
 //UPDATE
-router.post('/editappt/:id', (req, res, next) => {
-  /*WIP*/
+router.post('/editappt/:id', checkLoggedIn, (req, res, next) => {
+  if (req.user.role == 'client') {
+    req.user.appointments.includes(req.params.id)
+      ? null
+      : res.status(403).json({
+          message: `You do not have permissions to edit this appointment`,
+        })
+  } else if (req.user.role == 'professional') {
+    Salon.findOne({ owner: req.user.role })
+      .then((salon) => {
+        salon && salon.appointments.includes(req.params.id)
+          ? null
+          : res.status(403).json({
+              message: `You do not have permissions to edit this appointment`,
+            })
+      })
+      .catch((err) => {
+        next(new Error(err))
+      })
+  }
+  Appointment.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((appointment) => {
+      res.json(appointment)
+    })
+    .catch((err) => {
+      next(new Error(err))
+    })
 })
 
 //DELETE
