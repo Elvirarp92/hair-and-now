@@ -93,8 +93,34 @@ router.post('/editappt/:id', checkLoggedIn, (req, res, next) => {
 })
 
 //DELETE
-router.post('/deleteappt/:id', (req, res, next) => {
-  /*WIP*/
+router.post('/deleteappt/:id', checkLoggedIn, (req, res, next) => {
+  if (req.user.role == 'client') {
+    req.user.appointments.includes(req.params.id)
+      ? null
+      : res.status(403).json({
+          message: `You do not have permissions to delete this appointment`,
+        })
+  } else if (req.user.role == 'professional') {
+    Salon.findOne({ owner: req.user.role })
+      .then((salon) => {
+        salon && salon.appointments.includes(req.params.id)
+          ? null
+          : res.status(403).json({
+              message: `You do not have permissions to delete this appointment`,
+            })
+      })
+      .catch((err) => {
+        next(new Error(err))
+      })
+  }
+
+  Appointment.findByIdAndDelete(req.params.id)
+  .then(() => {
+    res.json({ message: `Appointment document ${req.params.id} deleted!` })
+  }).catch((err) => {
+    next(new Error(err))
+  });
+
 })
 
 module.exports = router
