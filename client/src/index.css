@@ -6,6 +6,29 @@ body {
 
 h1, h2 {
   font-family: 'Playfair Display', serif;
+  color: #003049;
+}
+
+.red-button {
+  background: #d62828;
+  margin: 4px 0;
+  border: 0px;
+}
+
+.red-button:hover,
+.red-button:active,
+.red-button:focus {
+  background: #003049;
+  border: 0px;
+}
+
+.is-flex {
+  display: flex;
+}
+
+.is-centered {
+  align-items: center;
+  justify-content: center;
 }
 
 code {

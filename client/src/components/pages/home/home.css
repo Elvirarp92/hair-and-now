@@ -1,3 +1,15 @@
 h1 {
   text-align: center;
 }
+
+figure {
+  background: #003049;
+  height: 250px;
+  width: 300px;
+  margin: 32px;
+}
+
+.pro-cta {
+  text-align: center;
+  margin: 12px auto;
+}
