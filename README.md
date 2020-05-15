@@ -4,12 +4,13 @@ A web browser appointment scheduling app for salons, hairdressers and barbers. M
 ## API endpoints
 
 ### Authorization/Authentication
-| **Method** | **Route**       | **Description**                                                    |
-|------------|-----------------|--------------------------------------------------------------------|
-| POST       | /api/signup     | Adds a new User to the DB                                          |
-| POST       | /api/login      | Logs an user in, if username and password match the ones on the DB |
-| POST       | /api/logout     | Logs an user out                                                   |
-| GET        | /api/isloggedin | Checks whether there is a logged in user                           |
+| **Method** | **Route**                 | **Description**                                                    |
+|------------|---------------------------|--------------------------------------------------------------------|
+| POST       | /api/signup               | Adds a new User to the DB                                          |
+| POST       | /api/login                | Logs an user in, if username and password match the ones on the DB |
+| POST       | /api/logout               | Logs an user out                                                   |
+| GET        | /api/confirm/:confirmCode | Validates a registered account                                     |
+| GET        | /api/isloggedin           | Checks whether there is a logged in user                           |
 ### Salons
 | **Method**  | **Route**                     | **Description**                                                   |
 |-------------|-------------------------------|-------------------------------------------------------------------|
@@ -21,26 +22,25 @@ A web browser appointment scheduling app for salons, hairdressers and barbers. M
 ### Appointments
 | **Method** | **Route**                     | **Description**                                         |
 |------------|-------------------------------|---------------------------------------------------------|
-| GET        | /api/getclientappts/:clientId | Returns all appointments associated to a certain client |
-| GET        | /api/getsalonappts/:salonId   | Returns all appointments associated to a certain salon  |
+| GET        | /api/getuserappts/:id         | Returns all appointments associated to a certain user   |
 | GET        | /api/getappt/:id              | Returns a specific appointment                          |
-| POST       | /api/postnewappt              | Creates a new appointment                               |
+| POST       | /api/postnewappt/:salonId     | Creates a new appointment                               |
 | POST       | /api/editappt/:id             | Updates an existing appointment                         |
 | POST       | /api/deleteappt/:id           | Deletes an existing appointment                         |
 ### Comments
-| **Method** | **Route**                      | **Description**                                       |
-|------------|--------------------------------|-------------------------------------------------------|
-| GET        | /api/getsaloncomments/:salonId | Returns all comments associated to a salon            |
-| POST       | /api/postnewcomment/:salonId   | Creates a new comment, associated to a specific salon |
-| POST       | /api/editcomment/:commentId    | Updates an existing comment                           |
-| POST       | /api/deletecomment/:commentId  | Deletes an existing comment                           |
+| **Method** | **Route**                      | **Description**                                               |
+|------------|--------------------------------|---------------------------------------------------------------|
+| GET        | /api/getcomments/:id           | Returns all comments posted to a certain post or salon        |
+| POST       | /api/postnewcomment/:id        | Creates a new comment, associated to a specific post or salon |
+| POST       | /api/deletecomment/:commentId  | Deletes an existing comment                                   |
 ### Posts
 | **Method** | **Route**                      | **Description**                                       |
 |------------|--------------------------------|-------------------------------------------------------|
-| GET        | /api/getsaloncomments/:salonId | Returns all comments associated to a salon            |
-| POST       | /api/postnewcomment/:salonId   | Creates a new comment, associated to a specific salon |
-| POST       | /api/editcomment/:commentId    | Updates an existing comment                           |
-| POST       | /api/deletecomment/:commentId  | Deletes an existing comment                           |
+| GET        | /api/getsalonposts/:salonId    | Returns all posts associated to a salon               |
+| GET        | /api/getpost/:id               | Returns a specific post                               |
+| POST       | /api/postnewpost/:salonId      | Creates a new post, associated to a specific salon    |
+| POST       | /api/editpost/:id              | Updates an existing post                              |
+| POST       | /api/deletepost/:postId        | Deletes an existing post                              |
 
 ## Client routes
 | **Route**   | **Description**                                                                                    |
