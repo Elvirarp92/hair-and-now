@@ -5,13 +5,18 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
+import './home.css'
+
 class Home extends Component {
   render() {
     return (
-      <main>
-        <h1>Hewwo!</h1>
-        <p>Hewwo mistew Obama?</p>
-      </main>
+      <Container as="main">
+        <Row as="section">
+          <Col s={12}>
+            <h1>Hair & Now</h1>
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }
