@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 
+import HomeMap from './homeMap/homeMap'
+
 import './home.css'
 
 class Home extends Component {
@@ -18,7 +20,7 @@ class Home extends Component {
             <h1>Hair & Now</h1>
           </Col>
           <Col xs={12} s={12} m={6} className="is-flex is-centered">
-            <figure className="salonMap"></figure>
+            <HomeMap className="salon-map"></HomeMap>
           </Col>
           <Col xs={12} s={12} m={6}>
             <Accordion>
@@ -31,9 +33,13 @@ class Home extends Component {
                 </Accordion.Collapse>
               </Card>
             </Accordion>
-            <Button size="lg" block="true" className="red-button">Buscar</Button>
+            <Button size="lg" block="true" className="red-button">
+              Buscar
+            </Button>
             <p className="pro-cta">¿Profesional? Anúnciate con nosotros</p>
-            <Button size="lg" block="true" className="red-button">Regístrate</Button>
+            <Button size="lg" block="true" className="red-button">
+              Regístrate
+            </Button>
           </Col>
         </Row>
       </Container>
