@@ -5,10 +5,12 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
+import { BrowserRouter as Router } from 'react-router-dom'
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Router>
     <App />
-  </React.StrictMode>,
+  </Router>,
   document.getElementById('root')
 );
 
