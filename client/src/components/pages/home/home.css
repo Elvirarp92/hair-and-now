@@ -1,12 +1,13 @@
 h1 {
   text-align: center;
+  margin: 16px 0px;
 }
 
 figure {
   background: #003049;
   height: 250px;
   width: 300px;
-  margin: 32px;
+  margin: 0px 0px 24px 0px;
 }
 
 .pro-cta {
