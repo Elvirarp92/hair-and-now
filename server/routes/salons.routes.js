@@ -7,11 +7,13 @@ const Salon = require('./../models/salon.model')
 
 //READ
 router.get('/getsalons/search', (req, res, next) => {
+  console.log("antes del find")
   Salon.find(req.query)
     .then((salons) => {
       res.json(salons)
     })
     .catch((err) => {
+      console.log(err)
       next(new Error(err))
     })
 })
