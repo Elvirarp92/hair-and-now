@@ -21,14 +21,36 @@ class HomeMap extends Component {
     this.salonService = new SalonService()
   }
 
+  initGeocoder = ({ maps }) => {
+    this.geocoder = new maps.Geocoder()
+    console.log('geocoder initializated!')
+  }
+
   getAllSalons = () => {
-    this.salonService.getSalons()
+    this.salonService
+      .getSalons()
       .then((response) => this.setState({ salons: response.data }))
       .catch((err) => console.log(err))
   }
 
   componentDidMount = () => this.getAllSalons()
 
+  generateMarkers(salon) {
+    let address = `${salon.address.street} ${salon.address.number} ${salon.address.zipcode} ${salon.address.town}`
+    this.geocoder.geocode({ address: address }, (results, status) => {
+      if (status === 'OK') {
+        return (
+          <Marker
+            position={results[0].geometry.location}
+            name={salon.name}
+            color="blue"
+          />
+        )
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status)
+      }
+    })
+  }
 
   render() {
     return (
@@ -38,15 +60,12 @@ class HomeMap extends Component {
             key: 'AIzaSyBYZzf1A-amv8Qf-GiLFQ_18owJVbaABYg',
             language: 'es',
           }}
+          yesIWantToUseGoogleMapApiInternals={true}
+          onGoogleApiLoaded={this.initGeocoder}
           defaultCenter={defaultProps.center}
           center={this.state.center}
           defaultZoom={defaultProps.zoom}>
-          <Marker
-            lat={37.392964}
-            lng={-5.980054}
-            name="My Marker"
-            color="blue"
-          />
+          {this.state.salons.forEach((salon) => this.generateMarkers(salon))}
         </GoogleMapReact>
       </article>
     )
