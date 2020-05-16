@@ -4,6 +4,11 @@ import SalonService from './../../../services/salons.services'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
+
+import LightNavbar from './../../ui/lightNavbar/lightNavbar'
+
+import './salonDetails.css'
 
 class SalonDetails extends Component {
   constructor(props) {
@@ -17,6 +22,7 @@ class SalonDetails extends Component {
     this.salonService
       .getSalon(id)
       .then((response) => {
+        console.log(response.data)
         this.setState(response.data)
       })
       .catch((err) => {
@@ -25,11 +31,28 @@ class SalonDetails extends Component {
   }
 
   componentDidMount = () => {
-    this.getSalonInfo() 
+    this.getSalonInfo()
   }
 
   render() {
-    return <p>{this.state.name}</p>
+    return (
+      <Container as="main">
+        <LightNavbar />
+        <h1>{this.state.name}</h1>
+        <Row>
+          <Col>
+            <p className="salon-info-tidbits">{this.state.type}</p>
+          </Col>
+          <Col>
+            <p className="rating-module">{this.state.rating}/10</p>
+          </Col>
+        </Row>
+        <Button size="lg" block="true" className="red-button">
+          Pedir cita
+        </Button>
+        {/* <p>{`${this.state.address.street},`}</p> */}
+      </Container>
+    )
   }
 }
 
