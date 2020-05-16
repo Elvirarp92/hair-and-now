@@ -7,11 +7,30 @@ import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 
-import HomeMap from './homeMap/homeMap'
+import SalonList from './salonList/salonList'
+
+import SalonService from './../../../services/salons.services'
 
 import './home.css'
 
 class Home extends Component {
+  constructor() {
+    super()
+    this.state = {
+      salons: [],
+    }
+    this.salonService = new SalonService()
+  }
+
+  getAllSalons = () => {
+    this.salonService
+      .getSalons()
+      .then((response) => this.setState({ salons: response.data }))
+      .catch((err) => console.log(err))
+  }
+
+  componentDidMount = () => this.getAllSalons()
+
   render() {
     return (
       <Container as="main">
@@ -20,7 +39,7 @@ class Home extends Component {
             <h1>Hair & Now</h1>
           </Col>
           <Col xs={12} s={12} m={6} className="is-flex is-centered">
-            <HomeMap className="salon-map"></HomeMap>
+            <SalonList salons={this.state.salons}/>
           </Col>
           <Col xs={12} s={12} m={6}>
             <Accordion>
