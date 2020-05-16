@@ -1,3 +1,7 @@
+img {
+  width: 100%;
+}
+
 .salon-info-tidbits {
   text-transform: capitalize;
 }
@@ -9,4 +13,8 @@
 
 .rating-module {
   text-align: right;
+}
+
+.accordion-menu {
+  margin-top: 12px;
 }
