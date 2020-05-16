@@ -25,7 +25,6 @@ class SalonDetails extends Component {
   }
 
   componentDidMount = () => {
-    console.log("props: ", this.props)
     this.getSalonInfo() 
   }
 
