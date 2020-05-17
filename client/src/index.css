@@ -26,6 +26,10 @@ h1, h2 {
   display: flex;
 }
 
+.form-margin {
+  margin-top: 16px;
+}
+
 .is-centered {
   align-items: center;
   justify-content: center;
