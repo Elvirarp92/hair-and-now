@@ -32,6 +32,10 @@ class SignupForm extends Component {
     event.preventDefault()
   }
 
+  setType(event) {
+    console.log(event)
+  }
+
   render() {
     return (
       <main>
@@ -75,7 +79,7 @@ class SignupForm extends Component {
                     onChange={this.handleInputChange}
                   />
                 </Form.Group>
-                <Form.Group controlId="accountType">
+                <Form.Group controlId="accountType" onChange={this.handleInputChange}>
                   <Form.Check
                     inline
                     type="radio"
@@ -83,8 +87,8 @@ class SignupForm extends Component {
                     name="type"
                     id="type1"
                     value="cliente"
-                    checked
-                    onChange={this.handleInputChange}
+                    defaultChecked
+                   
                   />
                   <Form.Check
                     inline
@@ -93,7 +97,6 @@ class SignupForm extends Component {
                     name="type"
                     id="type2"
                     value="profesional"
-                    onChange={this.handleInputChange}
                   />
                 </Form.Group>
                 <Button
