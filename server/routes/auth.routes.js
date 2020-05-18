@@ -73,10 +73,22 @@ router.post('/signup', (req, res, next) => {
             text: `Para poder acceder a Hair&Now con tu usuario y contraseña, 
       por favor, confirma tu registro en el siguiente 
       enlace: http://localhost:5000/api/confirm/${user.confirmationCode}`,
-            html: `<p>Para poder acceder a LabExpress con tu usuario y contraseña, 
+            html: `<p>Para poder acceder a Hair&Now con tu usuario y contraseña, 
       por favor, confirma tu registro en 
       <a href="http://localhost:5000/api/confirm/${user.confirmationCode}">
       el siguiente enlace.</a></p>`,
+          })
+        } else if (user.role == 'professional') {
+          transporter.sendMail({
+            from: process.env.EMAIL,
+            to: user.email,
+            subject: 'Hemos recibido tu solicitud de registro a Hair&Now ⌚',
+            text: `Necesitamos comprobar si la dirección que has introducido para tu local 
+            es válida antes de enviar el código de confirmación. En un plazo de 24 a 72 
+            horas le enviaremos una respuesta. ¡Gracias por tu paciencia!`,
+            html: `<p>Necesitamos comprobar si la dirección que has introducido para tu 
+            local es válida antes de enviar el código de confirmación. En un plazo de 24 a 
+            72 horas le enviaremos una respuesta. ¡Gracias por tu paciencia!</p>`,
           })
         }
       })
@@ -85,6 +97,7 @@ router.post('/signup', (req, res, next) => {
         return
       })
       .catch((err) => {
+        console.log(err)
         res.status(400).json({ message: 'Saving user to database went wrong.' })
         return
       })
@@ -133,7 +146,7 @@ router.post('/login', (req, res, next) => {
       }
       res.status(200).json(user)
     })
-  })(req, res, next);
+  })(req, res, next)
 })
 
 router.post('/logout', (req, res, next) => {

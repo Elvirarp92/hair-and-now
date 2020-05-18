@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AuthService from './../../../services/auth.services'
 
 import LightNavbar from './../../ui/lightNavbar/lightNavbar'
 
@@ -16,9 +17,11 @@ class SignupForm extends Component {
         username: '',
         email: '',
         password: '',
-        type: 'cliente',
+        role: 'client',
       },
     }
+
+    this.authService = new AuthService()
   }
 
   handleInputChange = (event) => {
@@ -28,8 +31,18 @@ class SignupForm extends Component {
     this.setState({ loginInfo: loginInfoCopy })
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault()
+    this.authService
+      .signup(this.state.loginInfo)
+      .then((response) => {
+        this.props.history.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+        err.response.status === 400 &&
+          this.setState({ errorMessage: err.response.data.message })
+      })
   }
 
   setType(event) {
@@ -79,24 +92,25 @@ class SignupForm extends Component {
                     onChange={this.handleInputChange}
                   />
                 </Form.Group>
-                <Form.Group controlId="accountType" onChange={this.handleInputChange}>
+                <Form.Group
+                  controlId="accountType"
+                  onChange={this.handleInputChange}>
                   <Form.Check
                     inline
                     type="radio"
                     label="Cliente"
-                    name="type"
-                    id="type1"
-                    value="cliente"
+                    name="role"
+                    id="role1"
+                    value="client"
                     defaultChecked
-                   
                   />
                   <Form.Check
                     inline
                     type="radio"
                     label="Profesional"
-                    name="type"
-                    id="type2"
-                    value="profesional"
+                    name="role"
+                    id="role2"
+                    value="professional"
                   />
                 </Form.Group>
                 <Button
