@@ -97,7 +97,6 @@ router.post('/signup', (req, res, next) => {
         return
       })
       .catch((err) => {
-        console.log(err)
         res.status(400).json({ message: 'Saving user to database went wrong.' })
         return
       })
