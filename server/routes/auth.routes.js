@@ -85,10 +85,10 @@ router.post('/signup', (req, res, next) => {
             subject: 'Hemos recibido tu solicitud de registro a Hair&Now ⌚',
             text: `Necesitamos comprobar si la dirección que has introducido para tu local 
             es válida antes de enviar el código de confirmación. En un plazo de 24 a 72 
-            horas le enviaremos una respuesta. ¡Gracias por tu paciencia!`,
+            horas te enviaremos una respuesta. ¡Gracias por tu paciencia!`,
             html: `<p>Necesitamos comprobar si la dirección que has introducido para tu 
             local es válida antes de enviar el código de confirmación. En un plazo de 24 a 
-            72 horas le enviaremos una respuesta. ¡Gracias por tu paciencia!</p>`,
+            72 horas te enviaremos una respuesta. ¡Gracias por tu paciencia!</p>`,
           })
         }
       })
