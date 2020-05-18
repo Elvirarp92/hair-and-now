@@ -9,33 +9,28 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-class SignupForm extends Component {
-  constructor() {
-    super()
+class LoginForm extends Component {
+  constructor(props) {
+    super(props)
     this.state = {
-      signupInfo: {
-        username: '',
-        email: '',
-        password: '',
-        role: 'client',
-      },
+      loginInfo: { username: '', password: '' },
     }
-
     this.authService = new AuthService()
   }
 
   handleInputChange = (event) => {
-    let signupInfoCopy = { ...this.state.signupInfo }
+    let loginInfoCopy = { ...this.state.loginInfo }
     const { name, value } = event.target
-    signupInfoCopy = { ...signupInfoCopy, [name]: value }
-    this.setState({ signupInfo: signupInfoCopy })
+    loginInfoCopy = { ...loginInfoCopy, [name]: value }
+    this.setState({ loginInfo: loginInfoCopy })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
     this.authService
-      .signup(this.state.signupInfo)
-      .then((response) => {
+      .login(this.state.loginInfo)
+      .then((res) => {
+        this.props.setTheUser(res.data)
         this.props.history.push('/')
       })
       .catch((err) => {
@@ -48,11 +43,11 @@ class SignupForm extends Component {
     return (
       <main>
         <LightNavbar />
-        <h1>Registro</h1>
+        <h1>Inicio de sesión</h1>
         <Container>
-          <Row className="is-flex is-centered">
+          <Row className="form-margin" className="is-flex is-centered">
             <Col xs={10}>
-              <Form className="form-margin" onSubmit={this.handleSubmit}>
+              <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="username">
                   <Form.Label>Nombre de usuario</Form.Label>
                   <Form.Control
@@ -63,19 +58,6 @@ class SignupForm extends Component {
                     onChange={this.handleInputChange}
                   />
                 </Form.Group>
-                <Form.Group controlId="email">
-                  <Form.Label>Correo electrónico</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    placeholder="ejemplo@hairandnow.es"
-                    value={this.state.email}
-                    onChange={this.handleInputChange}
-                  />
-                  <Form.Text className="text-muted">
-                    Nunca compartiremos tu correo con ninguna otra entidad.
-                  </Form.Text>
-                </Form.Group>
                 <Form.Group controlId="password">
                   <Form.Label>Contraseña</Form.Label>
                   <Form.Control
@@ -84,27 +66,6 @@ class SignupForm extends Component {
                     placeholder="Contraseña"
                     value={this.state.password}
                     onChange={this.handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group
-                  controlId="accountType"
-                  onChange={this.handleInputChange}>
-                  <Form.Check
-                    inline
-                    type="radio"
-                    label="Cliente"
-                    name="role"
-                    id="role1"
-                    value="client"
-                    defaultChecked
-                  />
-                  <Form.Check
-                    inline
-                    type="radio"
-                    label="Profesional"
-                    name="role"
-                    id="role2"
-                    value="professional"
                   />
                 </Form.Group>
                 <Button
@@ -123,4 +84,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm
+export default LoginForm

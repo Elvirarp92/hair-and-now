@@ -15,6 +15,8 @@ const LightNavbar = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Inicio</Nav.Link>
+          <Nav.Link href="/signup">Registro</Nav.Link>
+          <Nav.Link href="/login">Iniciar sesión</Nav.Link>
           <Nav.Link href="#">Reservas</Nav.Link>
         </Nav>
       </Navbar.Collapse>
