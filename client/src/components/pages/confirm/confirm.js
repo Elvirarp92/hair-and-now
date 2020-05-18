@@ -17,7 +17,6 @@ class Confirm extends Component {
 
   componentDidMount = () => {
     const { id } = this.props.match.params
-    console.log(id)
     this.authService
       .confirm(id)
       .then((data) => {

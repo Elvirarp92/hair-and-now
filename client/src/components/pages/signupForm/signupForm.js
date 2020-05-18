@@ -39,14 +39,9 @@ class SignupForm extends Component {
         this.props.history.push('/')
       })
       .catch((err) => {
-        console.log(err)
         err.response.status === 400 &&
           this.setState({ errorMessage: err.response.data.message })
       })
-  }
-
-  setType(event) {
-    console.log(event)
   }
 
   render() {
