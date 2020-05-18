@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import AuthService from './../services/auth.services'
 
+import LightNavbar from './ui/lightNavbar/lightNavbar'
+
 import Home from './pages/home/home'
 import SalonDetails from './pages/salonDetails/salonDetails'
 import SignupForm from './pages/signupForm/signupForm'
@@ -28,26 +30,35 @@ class App extends Component {
 
   render() {
     return (
-      <Switch>
-        <Route path="/confirm/:id" render={(props) => <Confirm {...props} />} />
-        <Route
-          path="/salons/:id"
-          render={(props) => <SalonDetails {...props} />}
+      <>
+        <LightNavbar
+          setTheUser={this.setTheUser}
+          loggedInUser={this.state.loggedInUser}
         />
-        <Route
-          path="/signup"
-          render={(props) => (
-            <SignupForm {...props} setTheUser={this.setTheUser} />
-          )}
-        />
-        <Route
-          path="/login"
-          render={(props) => (
-            <LoginForm {...props} setTheUser={this.setTheUser} />
-          )}
-        />
-        <Route path="/" render={() => <Home />} />
-      </Switch>
+        <Switch>
+          <Route
+            path="/confirm/:id"
+            render={(props) => <Confirm {...props} />}
+          />
+          <Route
+            path="/salons/:id"
+            render={(props) => <SalonDetails {...props} />}
+          />
+          <Route
+            path="/signup"
+            render={(props) => (
+              <SignupForm {...props} setTheUser={this.setTheUser} />
+            )}
+          />
+          <Route
+            path="/login"
+            render={(props) => (
+              <LoginForm {...props} setTheUser={this.setTheUser} />
+            )}
+          />
+          <Route path="/" render={() => <Home />} />
+        </Switch>
+      </>
     )
   }
 }

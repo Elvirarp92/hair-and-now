@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 
-import LightNavbar from './../../ui/lightNavbar/lightNavbar'
 
 import './salonDetails.css'
 
@@ -38,8 +37,6 @@ class SalonDetails extends Component {
 
   render() {
     return (
-      <main>
-        <LightNavbar />
         <Container>
           <h1>{this.state.name}</h1>
           <Row>
@@ -113,7 +110,6 @@ class SalonDetails extends Component {
             </Card>
           </Accordion>
         </Container>
-      </main>
     )
   }
 }
