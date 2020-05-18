@@ -29,6 +29,9 @@ class App extends Component {
   }
 
   render() {
+
+    this.fetchUser()
+    
     return (
       <>
         <LightNavbar
