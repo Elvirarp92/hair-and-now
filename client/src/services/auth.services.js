@@ -11,5 +11,12 @@ export default class services {
   signup = ({ username, password, email, role }) =>
     this.service.post('/signup', { username, password, email, role })
 
+  confirm = ({ confirmCode }) => this.service.get(`/confirm/${confirmCode}`)
+
+  login = ({ username, password }) =>
+    this.service.post('/login', { username, password })
+
+  logout = () => this.service.post('/logout')
+
   isLoggedIn = () => this.service.get('/isloggedin')
 }
