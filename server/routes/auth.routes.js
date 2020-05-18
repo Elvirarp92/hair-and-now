@@ -72,10 +72,10 @@ router.post('/signup', (req, res, next) => {
             subject: 'Confirma tu registro a Hair&Now ☑️',
             text: `Para poder acceder a Hair&Now con tu usuario y contraseña, 
       por favor, confirma tu registro en el siguiente 
-      enlace: http://localhost:5000/api/confirm/${user.confirmationCode}`,
+      enlace: http://localhost:3000/confirm/${user.confirmationCode}`,
             html: `<p>Para poder acceder a Hair&Now con tu usuario y contraseña, 
       por favor, confirma tu registro en 
-      <a href="http://localhost:5000/api/confirm/${user.confirmationCode}">
+      <a href="http://localhost:3000/confirm/${user.confirmationCode}">
       el siguiente enlace.</a></p>`,
           })
         } else if (user.role == 'professional') {

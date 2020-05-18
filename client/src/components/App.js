@@ -5,6 +5,7 @@ import AuthService from './../services/auth.services'
 import Home from './pages/home/home'
 import SalonDetails from './pages/salonDetails/salonDetails'
 import SignupForm from './pages/signupForm/signupForm'
+import Confirm from './pages/confirm/confirm'
 
 class App extends Component {
   constructor() {
@@ -30,6 +31,7 @@ class App extends Component {
   render() {
     return (
       <Switch>
+        <Route path="/confirm/:id" render={(props) => <Confirm {...props}/>} />
         <Route
           path="/salons/:id"
           render={(props) => <SalonDetails {...props} />}
