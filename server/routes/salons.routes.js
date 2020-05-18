@@ -7,7 +7,6 @@ const Salon = require('./../models/salon.model')
 
 //READ
 router.get('/getsalons/search', (req, res, next) => {
-  console.log("antes del find")
   Salon.find(req.query)
     .then((salons) => {
       res.json(salons)
@@ -64,9 +63,7 @@ router.post('/editsalon/:id', checkLoggedIn, (req, res, next) => {
             message: `You do not have permissions to edit this salon`,
           })
     )
-    .then((salonId) =>
-      Salon.findByIdAndUpdate(salonId, req.body, { new: true })
-    )
+    .then((salonId) => Salon.findByIdAndUpdate(salonId, req.body, { new: true }))
     .then((salon) => {
       res.json(salon)
     })

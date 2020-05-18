@@ -5,6 +5,7 @@ import AuthService from './../services/auth.services'
 import LightNavbar from './ui/lightNavbar/lightNavbar'
 
 import Home from './pages/home/home'
+import CreateSalon from './pages/createSalon/createSalon'
 import SalonDetails from './pages/salonDetails/salonDetails'
 import SignupForm from './pages/signupForm/signupForm'
 import LoginForm from './pages/loginForm/loginForm'
@@ -29,37 +30,24 @@ class App extends Component {
   }
 
   render() {
-
     this.fetchUser()
-    
+
     return (
       <>
-        <LightNavbar
-          setTheUser={this.setTheUser}
-          loggedInUser={this.state.loggedInUser}
-        />
+        <LightNavbar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
         <Switch>
+          <Route path='/confirm/:id' render={(props) => <Confirm {...props} />} />
+          <Route path='/salons/create' render={(props) => <CreateSalon {...props} />} />
+          <Route path='/salons/:id' render={(props) => <SalonDetails {...props} />} />
           <Route
-            path="/confirm/:id"
-            render={(props) => <Confirm {...props} />}
+            path='/signup'
+            render={(props) => <SignupForm {...props} setTheUser={this.setTheUser} />}
           />
           <Route
-            path="/salons/:id"
-            render={(props) => <SalonDetails {...props} />}
+            path='/login'
+            render={(props) => <LoginForm {...props} setTheUser={this.setTheUser} />}
           />
-          <Route
-            path="/signup"
-            render={(props) => (
-              <SignupForm {...props} setTheUser={this.setTheUser} />
-            )}
-          />
-          <Route
-            path="/login"
-            render={(props) => (
-              <LoginForm {...props} setTheUser={this.setTheUser} />
-            )}
-          />
-          <Route path="/" render={() => <Home />} />
+          <Route path='/' render={() => <Home />} />
         </Switch>
       </>
     )

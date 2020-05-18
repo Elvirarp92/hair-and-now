@@ -8,7 +8,8 @@ export default class services {
     })
   }
 
-  getSalons = () => this.service.get('/getsalons/search');
-  getSalon = salonId => this.service.get(`/getsalon/${salonId}`)
+  getSalons = () => this.service.get('/getsalons/search')
+  getSalon = (salonId) => this.service.get(`/getsalon/${salonId}`)
+  createSalon = ({ name, type }) => this.service.post(`/postnewsalon`, { name, type })
 
 }
