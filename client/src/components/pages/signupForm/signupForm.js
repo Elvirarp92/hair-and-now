@@ -33,9 +33,11 @@ class SignupForm extends Component {
     event.preventDefault()
     this.authService
       .signup(this.state.signupInfo)
-      .then((response) => {
-        this.props.history.push('/')
-      })
+      .then(() =>
+        this.state.signupInfo.role == 'client'
+          ? this.props.history.push('/')
+          : this.props.history.push('/salons/create')
+      )
       .catch((err) => {
         err.response.status === 400 && this.setState({ errorMessage: err.response.data.message })
       })

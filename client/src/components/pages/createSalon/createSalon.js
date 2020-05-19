@@ -106,15 +106,12 @@ class CreateSalon extends Component {
       },
     }
 
-    console.log(salon)
-
     this.salonService
       .createSalon(salon)
       .then((res) => {
         this.props.history.push('/')
       })
       .catch((err) => {
-        // err.response.status === 400 && this.setState({ errorMessage: err.response.data.message })
         console.log(err)
       })
   }
