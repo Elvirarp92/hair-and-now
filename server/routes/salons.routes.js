@@ -28,7 +28,7 @@ router.get('/getsalon/:id', (req, res, next) => {
 
 //CREATE
 router.post('/postnewsalon', checkRole(['professional']), (req, res, next) => {
-  newSalon = {
+  const newSalon = {
     name: req.body.name,
     type: req.body.type,
     address: {
