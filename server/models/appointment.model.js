@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const appointmentSchema = new Schema(
   {
-    services: { type: [String] },
+    services: { type: [Schema.Types.ObjectId], ref: 'Pack' },
     dates: { type: [Date] },
     validated: { type: Boolean, default: false },
   },
