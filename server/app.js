@@ -22,6 +22,7 @@ app.use('/api', require('./routes/salons.routes'))
 app.use('/api', require('./routes/appointments.routes'))
 app.use('/api', require('./routes/comments.routes'))
 app.use('/api', require('./routes/posts.routes'))
+app.use('/api', require('./routes/services.routes'))
 
 app.use((req, res) => {
   res.sendFile(__dirname + '/public/index.html')

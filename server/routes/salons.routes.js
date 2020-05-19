@@ -12,7 +12,6 @@ router.get('/getsalons/search', (req, res, next) => {
       res.json(salons)
     })
     .catch((err) => {
-      console.log(err)
       next(new Error(err))
     })
 })
