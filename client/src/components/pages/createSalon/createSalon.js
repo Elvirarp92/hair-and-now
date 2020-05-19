@@ -57,63 +57,65 @@ class CreateSalon extends Component {
     event.preventDefault()
 
     const salon = {
-      name: this.state.name,
-      type: this.state.type,
+      name: this.state.salonInfo.name,
+      type: this.state.salonInfo.type,
       address: {
-        street: this.state.street,
-        number: this.state.number,
-        zipcode: this.state.zipcode,
-        town: this.state.town,
-        province: this.state.province,
-        complements: this.state.complements,
+        street: this.state.salonInfo.street,
+        number: this.state.salonInfo.number,
+        zipcode: this.state.salonInfo.zipcode,
+        town: this.state.salonInfo.town,
+        province: this.state.salonInfo.province,
+        complements: this.state.salonInfo.complements,
       },
       schedule: {
         monday: {
-          openingDay: this.state.mondayOpeningDay,
-          openingTime: this.state.mondayOpeningTime,
-          closingTime: this.state.mondayClosingTime,
+          openingDay: this.state.salonInfo.mondayOpeningDay,
+          openingTime: this.state.salonInfo.mondayOpeningTime,
+          closingTime: this.state.salonInfo.mondayClosingTime,
         },
         tuesday: {
-          openingDay: this.state.tuesdayOpeningDay,
-          openingTime: this.state.tuesdayOpeningTime,
-          closingTime: this.state.tuesdayClosingTime,
+          openingDay: this.state.salonInfo.tuesdayOpeningDay,
+          openingTime: this.state.salonInfo.tuesdayOpeningTime,
+          closingTime: this.state.salonInfo.tuesdayClosingTime,
         },
         wednesday: {
-          openingDay: this.state.wednesdayOpeningDay,
-          openingTime: this.state.wednesdayOpeningTime,
-          closingTime: this.state.wednesdayClosingTime,
+          openingDay: this.state.salonInfo.wednesdayOpeningDay,
+          openingTime: this.state.salonInfo.wednesdayOpeningTime,
+          closingTime: this.state.salonInfo.wednesdayClosingTime,
         },
         thursday: {
-          openingDay: this.state.thursdayOpeningDay,
-          openingTime: this.state.thursdayOpeningTime,
-          closingTime: this.state.thursdayClosingTime,
+          openingDay: this.state.salonInfo.thursdayOpeningDay,
+          openingTime: this.state.salonInfo.thursdayOpeningTime,
+          closingTime: this.state.salonInfo.thursdayClosingTime,
         },
         friday: {
-          openingDay: this.state.fridayOpeningDay,
-          openingTime: this.state.fridayOpeningTime,
-          closingTime: this.state.fridayClosingTime,
+          openingDay: this.state.salonInfo.fridayOpeningDay,
+          openingTime: this.state.salonInfo.fridayOpeningTime,
+          closingTime: this.state.salonInfo.fridayClosingTime,
         },
         saturday: {
-          openingDay: this.state.saturdayOpeningDay,
-          openingTime: this.state.saturdayOpeningTime,
-          closingTime: this.state.saturdayClosingTime,
+          openingDay: this.state.salonInfo.saturdayOpeningDay,
+          openingTime: this.state.salonInfo.saturdayOpeningTime,
+          closingTime: this.state.salonInfo.saturdayClosingTime,
         },
         sunday: {
-          openingDay: this.state.sundayOpeningDay,
-          openingTime: this.state.sundayOpeningTime,
-          closingTime: this.state.sundayClosingTime,
+          openingDay: this.state.salonInfo.sundayOpeningDay,
+          openingTime: this.state.salonInfo.sundayOpeningTime,
+          closingTime: this.state.salonInfo.sundayClosingTime,
         },
       },
     }
 
+    console.log(salon)
+
     this.salonService
       .createSalon(salon)
       .then((res) => {
-        this.props.setTheUser(res.data)
         this.props.history.push('/')
       })
       .catch((err) => {
-        err.response.status === 400 && this.setState({ errorMessage: err.response.data.message })
+        // err.response.status === 400 && this.setState({ errorMessage: err.response.data.message })
+        console.log(err)
       })
   }
 
@@ -123,7 +125,7 @@ class CreateSalon extends Component {
         <h1>Nueva peluquería</h1>
         <Row className='is-flex is-centered'>
           <Col xs={10}>
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId='formName'>
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control
