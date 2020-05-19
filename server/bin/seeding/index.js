@@ -11,7 +11,7 @@ module.exports = [
   { appointment },
   { user },
   { post },
-  { pack },
   { salon },
+  { pack },
   { comment },
 ]

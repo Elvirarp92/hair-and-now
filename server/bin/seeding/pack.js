@@ -6,6 +6,7 @@ module.exports = [
       {
         refName: 'barber1tendencia',
         data: {
+          salon: refs.salons.firstBarbershop._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteTendenciaCab._id,
@@ -17,6 +18,7 @@ module.exports = [
       {
         refName: 'barber1clasico',
         data: {
+          salon: refs.salons.firstBarbershop._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteClasicoCab._id,
@@ -28,6 +30,7 @@ module.exports = [
       {
         refName: 'barber1afeitado',
         data: {
+          salon: refs.salons.firstBarbershop._id,
           services: [refs.services.afeitadoNavaja._id],
           price: 19,
         },
@@ -35,6 +38,7 @@ module.exports = [
       {
         refName: 'barber1barba',
         data: {
+          salon: refs.salons.firstBarbershop._id,
           services: [refs.services.arregloBarba._id],
           price: 15.5,
         },
@@ -42,6 +46,7 @@ module.exports = [
       {
         refName: 'barber1clasicoybarba',
         data: {
+          salon: refs.salons.firstBarbershop._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteClasicoCab._id,
@@ -54,6 +59,7 @@ module.exports = [
       {
         refName: 'barber1clasicoyafeitado',
         data: {
+          salon: refs.salons.firstBarbershop._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteClasicoCab._id,
@@ -66,6 +72,7 @@ module.exports = [
       {
         refName: 'salon1corteypeinado',
         data: {
+          salon: refs.salons.firstSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteSra._id,
@@ -77,6 +84,7 @@ module.exports = [
       {
         refName: 'salon1recogido',
         data: {
+          salon: refs.salons.firstSalon._id,
           services: [refs.services.lavado._id, refs.services.recogido._id],
           price: 35,
         },
@@ -84,6 +92,7 @@ module.exports = [
       {
         refName: 'salon1tinte',
         data: {
+          salon: refs.salons.firstSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.tinteSra._id,
@@ -95,6 +104,7 @@ module.exports = [
       {
         refName: 'salon1corteytinte',
         data: {
+          salon: refs.salons.firstSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteSra._id,
@@ -107,6 +117,7 @@ module.exports = [
       {
         refName: 'salon1mechas',
         data: {
+          salon: refs.salons.firstSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.mechasSra._id,
@@ -118,6 +129,7 @@ module.exports = [
       {
         refName: 'salon1corteymechas',
         data: {
+          salon: refs.salons.firstSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteSra._id,
@@ -130,6 +142,7 @@ module.exports = [
       {
         refName: 'salon2corteypeinado',
         data: {
+          salon: refs.salons.secondSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteSra._id,
@@ -141,6 +154,7 @@ module.exports = [
       {
         refName: 'salon2recogido',
         data: {
+          salon: refs.salons.secondSalon._id,
           services: [refs.services.lavado._id, refs.services.recogido._id],
           price: 35,
         },
@@ -148,6 +162,7 @@ module.exports = [
       {
         refName: 'salon2tinte',
         data: {
+          salon: refs.salons.secondSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.tinteSra._id,
@@ -159,6 +174,7 @@ module.exports = [
       {
         refName: 'salon2corteytinte',
         data: {
+          salon: refs.salons.secondSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteSra._id,
@@ -171,6 +187,7 @@ module.exports = [
       {
         refName: 'salon2mechas',
         data: {
+          salon: refs.salons.secondSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.mechasSra._id,
@@ -182,6 +199,7 @@ module.exports = [
       {
         refName: 'salon2corteymechas',
         data: {
+          salon: refs.salons.secondSalon._id,
           services: [
             refs.services.lavado._id,
             refs.services.corteSra._id,

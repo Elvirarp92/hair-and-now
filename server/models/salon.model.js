@@ -55,7 +55,6 @@ const salonSchema = new Schema(
         closingTime: String,
       },
     },
-    packs: { type: [Schema.Types.ObjectId], ref: 'Pack' },
     rating: Number,
     phoneNumber: String,
     geoCode: Object,

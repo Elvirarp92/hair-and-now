@@ -51,14 +51,6 @@ module.exports = [
               openingDay: false,
             },
           },
-          packs: [
-            refs.packs.barber1tendencia._id,
-            refs.packs.barber1clasico._id,
-            refs.packs.barber1afeitado._id,
-            refs.packs.barber1barba._id,
-            refs.packs.barber1clasicoybarba._id,
-            refs.packs.barber1clasicoyafeitado._id,
-          ],
           rating: 8.5,
           socialMediaHandles: {
             facebook: faker.internet.userName(),
@@ -120,14 +112,6 @@ module.exports = [
               openingDay: false,
             },
           },
-          packs: [
-            refs.packs.salon1corteypeinado._id,
-            refs.packs.salon1recogido._id,
-            refs.packs.salon1tinte._id,
-            refs.packs.salon1corteytinte._id,
-            refs.packs.salon1mechas._id,
-            refs.packs.salon1corteymechas._id,
-          ],
           rating: 6.8,
           socialMediaHandles: {
             facebook: faker.internet.userName(),
@@ -183,14 +167,6 @@ module.exports = [
               openingDay: false,
             },
           },
-          packs: [
-            refs.packs.salon2corteypeinado._id,
-            refs.packs.salon2recogido._id,
-            refs.packs.salon2tinte._id,
-            refs.packs.salon2corteytinte._id,
-            refs.packs.salon2mechas._id,
-            refs.packs.salon2corteymechas._id,
-          ],
           rating: 6.8,
           socialMediaHandles: {
             facebook: faker.internet.userName(),
