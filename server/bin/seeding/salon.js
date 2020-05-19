@@ -12,7 +12,7 @@ module.exports = [
           name: faker.company.companyName(),
           type: 'barbería',
           address: {
-            street: 'Avenida José Laguillo',
+            street: 'Calle José Laguillo',
             number: 27,
             zipcode: 41003,
             town: 'Sevilla',
@@ -52,16 +52,27 @@ module.exports = [
             },
           },
           rating: 8.5,
+          phoneNumber: faker.phone.phoneNumber(),
           socialMediaHandles: {
             facebook: faker.internet.userName(),
             twitter: `@${faker.internet.userName()}`,
           },
+          geoCode: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: [-5.980414152145386, 37.39271713976367],
+                },
+              },
+            ],
+          },
           owner: refs.users.firstBarbershopOwner._id,
           posts: [refs.posts.barberPost._id],
-          appointments: [
-            refs.appointments.barberAppt1._id,
-            refs.appointments.barberAppt2._id,
-          ],
+          appointments: [refs.appointments.barberAppt1._id, refs.appointments.barberAppt2._id],
         },
       },
       {
@@ -112,7 +123,21 @@ module.exports = [
               openingDay: false,
             },
           },
-          rating: 6.8,
+          rating: 7.3,
+          geoCode: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: [-5.980104357004166, 37.394725573867476],
+                },
+              },
+            ],
+          },
+          phoneNumber: faker.phone.phoneNumber(),
           socialMediaHandles: {
             facebook: faker.internet.userName(),
             twitter: `@${faker.internet.userName()}`,
@@ -168,6 +193,20 @@ module.exports = [
             },
           },
           rating: 6.8,
+          geoCode: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: [-5.980454385280609, 37.39416513559976],
+                },
+              },
+            ],
+          },
+          phoneNumber: faker.phone.phoneNumber(),
           socialMediaHandles: {
             facebook: faker.internet.userName(),
             twitter: `@${faker.internet.userName()}`,
