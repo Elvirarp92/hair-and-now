@@ -42,7 +42,7 @@ class LightNavbar extends Component {
               <Nav.Link href='#'>Reservas</Nav.Link>
             ) : null}
             {this.props.loggedInUser && this.props.loggedInUser.role === 'professional' ? (
-              <Nav.Link href='#'>Gestión</Nav.Link>
+              <Nav.Link href='/user/professionals/dashboard'>Gestión</Nav.Link>
             ) : null}
           </Nav>
         </Navbar.Collapse>
