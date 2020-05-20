@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
-import { registerLocale, setDefaultLocale } from 'react-datepicker'
+import { registerLocale } from 'react-datepicker'
 import es from 'date-fns/locale/es'
 
 import AppointmentService from './../../../services/appointments.services'
@@ -9,6 +9,8 @@ import SalonService from './../../../services/salons.services'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Alert from 'react-bootstrap/Alert'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import './createAppt.css'
@@ -22,11 +24,10 @@ class CreateAppt extends Component {
       salonInfo: {},
 
       apptInfo: {
-        date: [],
+        dates: [],
       },
 
-      dateManager: new Date()
-
+      dateManager: new Date(),
     }
     this.appointmentService = new AppointmentService()
     this.packService = new PackService()
@@ -34,9 +35,8 @@ class CreateAppt extends Component {
   }
 
   getPacks() {
-    const id = this.props.match.params.salonId
     this.packService
-      .getPacks(id)
+      .getPacks(this.props.match.params.salonId)
       .then((response) => this.setState({ packs: response.data }))
       .catch((err) => console.log(err))
   }
@@ -53,17 +53,13 @@ class CreateAppt extends Component {
       })
   }
 
-  handleDateChange = (date) => {
-    let dateCopy = [...this.state.apptInfo.date]
-    console.log(dateCopy)
-    dateCopy.push(date)
-    this.setState({
-      apptInfo: { date: dateCopy },
-      dateManager: date
-    })
+  handleDateChange = (date) => this.setState({ dateManager: date })
 
-    console.log(this.state)
-
+  pushDate = (event) => {
+    event.preventDefault()
+    let apptInfoCopy = { ...this.state.apptInfo }
+    apptInfoCopy.dates.push(this.state.dateManager)
+    this.setState({ apptInfo: apptInfoCopy })
   }
 
   handleInputChange = (event) => {
@@ -73,6 +69,18 @@ class CreateAppt extends Component {
     this.setState({ apptInfo: apptInfoCopy })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    this.appointmentService
+      .postNewAppt(this.state.apptInfo, this.props.match.params.salonId)
+      .then((res) => {
+        this.props.history.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   componentDidMount = () => {
     this.getPacks()
     this.getSalonInfo()
@@ -80,10 +88,35 @@ class CreateAppt extends Component {
 
   render() {
     return (
-      <section>
+      <Container as='section'>
         <h1>Pedir cita en {this.state.salonInfo.name}</h1>
-        <Form>
-          <h2>Elige un pack de servicios</h2>
+        <h2>Elige fecha y hora</h2>
+        <p className='datetime-rec'>Te recomendamos introducir varias fechas alternativas</p>
+        {this.state.apptInfo.dates.length > 0 &&
+          this.state.apptInfo.dates.map((elm, idx) => (
+            <Alert key={idx} className='date-alert'>
+              {elm.toLocaleString()}
+            </Alert>
+          ))}
+
+        <Form className='is-flex is-centered' onSubmit={this.pushDate}>
+          <DatePicker
+            locale='es'
+            showTimeSelect
+            timeFormat='HH:mm'
+            timeIntervals={15}
+            timeCaption='Hora'
+            className='date'
+            onChange={this.handleDateChange}
+            selected={this.state.dateManager}
+            dateFormat='d MMMM yyyy h:mm aa'
+          />
+          <Button className='red-button' type='submit'>
+            Añadir
+          </Button>
+        </Form>
+        <h2>Elige un pack de servicios</h2>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Group onChange={this.handleInputChange}>
             {this.state.packs &&
               this.state.packs.map((elm) => (
@@ -103,25 +136,11 @@ class CreateAppt extends Component {
                 </article>
               ))}
           </Form.Group>
-          <h2>Elige fecha y hora</h2>
-          <p className='datetime-rec'>Te recomendamos introducir varias fechas alternativas</p>
-          <Form.Group>
-            <DatePicker
-              locale='es'
-              showTimeSelect
-              timeFormat='HH:mm'
-              timeIntervals={15}
-              timeCaption='Hora'
-              className='date'
-              onChange={this.handleDateChange}
-              selected={this.state.dateManager}
-            />
-          </Form.Group>
           <Button size='lg' block='true' className='red-button' type='submit'>
             Crear
           </Button>
         </Form>
-      </section>
+      </Container>
     )
   }
 }

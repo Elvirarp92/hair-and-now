@@ -35,13 +35,12 @@ router.post(
   (req, res, next) => {
     let appointmentObject = {
       services: [req.body.services],
-      dates: [req.body.dates],
+      dates: req.body.dates,
       validated: false,
     }
 
     Appointment.create(appointmentObject)
       .then((createdAppt) => {
-        console.log(createdAppt)
         appointmentObject = createdAppt
         return Salon.findByIdAndUpdate(req.params.salonId, {
           $push: { appointments: createdAppt._id },
