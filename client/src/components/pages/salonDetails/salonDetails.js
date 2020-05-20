@@ -23,7 +23,6 @@ class SalonDetails extends Component {
     this.salonService
       .getSalon(id)
       .then((response) => {
-        console.log(response.data)
         this.setState(response.data)
       })
       .catch((err) => {
