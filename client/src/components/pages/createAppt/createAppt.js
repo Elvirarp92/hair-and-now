@@ -136,9 +136,11 @@ class CreateAppt extends Component {
                 </article>
               ))}
           </Form.Group>
-          <Button size='lg' block='true' className='red-button' type='submit'>
-            Crear
-          </Button>
+          {this.state.apptInfo.dates.length > 0 && (
+            <Button size='lg' block='true' className='red-button' type='submit'>
+              Crear
+            </Button>
+          )}
         </Form>
       </Container>
     )
