@@ -43,7 +43,7 @@ class App extends Component {
           />
           <Route path='/confirm/:id' render={(props) => <Confirm {...props} />} />
           <Route path='/salons/create' render={(props) => <CreateSalon {...props} />} />
-          <Route path='/salons/:id' render={(props) => <SalonDetails {...props} />} />
+          <Route path='/salons/:id' render={(props) => <SalonDetails {...props} loggedInUser={this.state.loggedInUser} />} />
           <Route
             path='/signup'
             render={(props) => <SignupForm {...props} setTheUser={this.setTheUser} />}
