@@ -5,7 +5,6 @@ import SalonService from './../../../services/salons.services'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import DateTimePicker from 'react-datetime-picker'
 
 import './createAppt.css'
 
@@ -85,27 +84,6 @@ class CreateAppt extends Component {
           </Form.Group>
           <h2>Elige fecha y hora</h2>
           <p className='datetime-rec'>Te recomendamos introducir varias fechas alternativas</p>
-          <Form.Group as='article'>
-            <DateTimePicker
-              className='date'
-              onChange={this.handleDateChange}
-              value={this.state.apptInfo.date}
-            />
-          </Form.Group>
-          {/* <Form.Group as='article'>
-            <DateTimePicker
-              className='date'
-              onChange={this.handleDateChange}
-              value={this.state.apptInfo.date2}
-            />
-          </Form.Group>
-          <Form.Group as='article'>
-            <DateTimePicker
-              className='date'
-              onChange={this.handleDateChange}
-              value={this.state.apptInfo.date3}
-            />
-          </Form.Group> */}
           <Button size='lg' block='true' className='red-button' type='submit'>
             Crear
           </Button>
