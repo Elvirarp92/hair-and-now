@@ -36,9 +36,14 @@ class LightNavbar extends Component {
             ) : (
               <>
                 <Nav.Link onClick={this.logout}>Cerrar sesión</Nav.Link>
-                <Nav.Link href='#'>Reservas</Nav.Link>
               </>
             )}
+            {this.props.loggedInUser && this.props.loggedInUser.role === 'client' ? (
+              <Nav.Link href='#'>Reservas</Nav.Link>
+            ) : null}
+            {this.props.loggedInUser && this.props.loggedInUser.role === 'professional' ? (
+              <Nav.Link href='#'>Gestión</Nav.Link>
+            ) : null}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
