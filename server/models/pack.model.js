@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const packSchema = new Schema(
   {
     salon: {type: Schema.Types.ObjectId, ref: "Salon"},
-    services: { type: [Schema.Types.ObjectId], ref: 'Service' },
+    services: { type: [Schema.Types.ObjectId], ref: 'Pack' },
     price: Number,
   },
   { timestamps: true }

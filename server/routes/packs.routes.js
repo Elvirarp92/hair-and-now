@@ -5,7 +5,6 @@ const { checkRole } = require('./../configs/authCheckers.config')
 
 const Pack = require('./../models/pack.model')
 const Salon = require('./../models/salon.model')
-const Service = require('./../models/service.model')
 
 //Redundant?
 router.get('/getpacks/:salonId', (req, res, next) => {
@@ -13,10 +12,6 @@ router.get('/getpacks/:salonId', (req, res, next) => {
     .populate({
       path: 'services',
       model: 'Service',
-      populate: {
-        path: 'services',
-        model: 'Service',
-      },
     })
     .then((packs) => res.json(packs))
     .catch((err) => next(new Error(err)))
@@ -25,14 +20,6 @@ router.get('/getpacks/:salonId', (req, res, next) => {
 //Get specific pack
 router.get('/getpack/:id', (req, res, next) => {
   Pack.findById(req.params.id)
-    .populate({
-      path: 'services',
-      model: 'Service',
-      populate: {
-        path: 'services',
-        model: 'Service',
-      },
-    })
     .then((pack) => res.json(pack))
     .catch((err) => next(new Error(err)))
 })
