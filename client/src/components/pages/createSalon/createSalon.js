@@ -141,7 +141,6 @@ class CreateSalon extends Component {
                   name='type'
                   id='type1'
                   value='barbería'
-                  defaultChecked
                 />
                 <Form.Check
                   inline
@@ -150,7 +149,6 @@ class CreateSalon extends Component {
                   name='type'
                   id='type3'
                   value='peluquería unisex'
-                  defaultChecked
                 />
                 <Form.Check
                   inline
@@ -167,7 +165,6 @@ class CreateSalon extends Component {
                   name='type'
                   id='type4'
                   value='otro'
-                  defaultChecked
                 />
               </Form.Group>
               <Form.Group>
