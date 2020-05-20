@@ -5,6 +5,7 @@ import SalonService from './../../../services/salons.services'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import DateTimePicker from 'react-datetime-picker'
 
 import './createAppt.css'
 
@@ -55,14 +56,14 @@ class CreateAppt extends Component {
           <h2>Elige un pack de servicios</h2>
           {this.state.packs &&
             this.state.packs.map((elm) => (
-              <Form.Group as="article" key={elm._id} className='packCard'>
+              <Form.Group as='article' key={elm._id} className='packCard'>
                 <Form.Label>
-                <Form.Check
-                  type='radio'
-                  name='services'
-                  id={`services${elm._id}`}
-                  value={elm._id}
-                />
+                  <Form.Check
+                    type='radio'
+                    name='services'
+                    id={`services${elm._id}`}
+                    value={elm._id}
+                  />
                   {elm.services.map((elm) => (
                     <p key={elm._id}>{elm.name}</p>
                   ))}
@@ -70,11 +71,20 @@ class CreateAppt extends Component {
                 <p className='price'>{elm.price} € </p>
               </Form.Group>
             ))}
-            <h2>Elige fecha y hora</h2>
-            <p>Te recomendamos introducir varias fechas alternativas</p>
-            <Form.Group as="article">
-                <Form.Control type="datetime" />
-            </Form.Group>
+          <h2>Elige fecha y hora</h2>
+          <p className="datetime-rec">Te recomendamos introducir varias fechas alternativas</p>
+          <Form.Group as='article'>
+            <DateTimePicker className='date' />
+          </Form.Group>
+          <Form.Group as='article'>
+            <DateTimePicker className='date' />
+          </Form.Group>
+          <Form.Group as='article'>
+            <DateTimePicker className='date' />
+          </Form.Group>
+          <Button size='lg' block='true' className='red-button' type='submit'>
+            Crear
+          </Button>
         </Form>
       </section>
     )
