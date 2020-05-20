@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import DatePicker from 'react-datepicker'
+import { registerLocale, setDefaultLocale } from 'react-datepicker'
+import es from 'date-fns/locale/es'
+
 import AppointmentService from './../../../services/appointments.services'
 import PackService from './../../../services/packs.services'
 import SalonService from './../../../services/salons.services'
@@ -6,7 +10,10 @@ import SalonService from './../../../services/salons.services'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import 'react-datepicker/dist/react-datepicker.css'
 import './createAppt.css'
+
+registerLocale('es', es)
 
 class CreateAppt extends Component {
   constructor(props) {
@@ -15,8 +22,11 @@ class CreateAppt extends Component {
       salonInfo: {},
 
       apptInfo: {
-        date: new Date()
+        date: [],
       },
+
+      dateManager: new Date()
+
     }
     this.appointmentService = new AppointmentService()
     this.packService = new PackService()
@@ -43,7 +53,18 @@ class CreateAppt extends Component {
       })
   }
 
-  handleDateChange = (date) => this.setState({ apptInfo: {date} })
+  handleDateChange = (date) => {
+    let dateCopy = [...this.state.apptInfo.date]
+    console.log(dateCopy)
+    dateCopy.push(date)
+    this.setState({
+      apptInfo: { date: dateCopy },
+      dateManager: date
+    })
+
+    console.log(this.state)
+
+  }
 
   handleInputChange = (event) => {
     let apptInfoCopy = { ...this.state.apptInfo }
@@ -84,6 +105,18 @@ class CreateAppt extends Component {
           </Form.Group>
           <h2>Elige fecha y hora</h2>
           <p className='datetime-rec'>Te recomendamos introducir varias fechas alternativas</p>
+          <Form.Group>
+            <DatePicker
+              locale='es'
+              showTimeSelect
+              timeFormat='HH:mm'
+              timeIntervals={15}
+              timeCaption='Hora'
+              className='date'
+              onChange={this.handleDateChange}
+              selected={this.state.dateManager}
+            />
+          </Form.Group>
           <Button size='lg' block='true' className='red-button' type='submit'>
             Crear
           </Button>
