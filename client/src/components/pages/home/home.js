@@ -26,7 +26,7 @@ class Home extends Component {
 
   getAllSalons = () => {
     this.salonService
-      .getSalons()
+      .getSalons('')
       .then((response) => this.setState({ salons: response.data }))
       .catch((err) => console.log(err))
   }

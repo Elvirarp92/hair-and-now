@@ -8,7 +8,7 @@ export default class services {
     })
   }
 
-  getSalons = () => this.service.get('/getsalons/search')
+  getSalons = (queryString) => this.service.get(`/getsalons/search${queryString}`)
   getSalon = (salonId) => this.service.get(`/getsalon/${salonId}`)
   createSalon = ({ name, type, address, schedule }) => this.service.post(`/postnewsalon`, { name, type, address, schedule })
 
