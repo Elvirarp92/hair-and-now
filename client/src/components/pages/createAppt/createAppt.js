@@ -15,7 +15,9 @@ class CreateAppt extends Component {
     this.state = {
       salonInfo: {},
 
-      apptInfo: {},
+      apptInfo: {
+        date: new Date()
+      },
     }
     this.appointmentService = new AppointmentService()
     this.packService = new PackService()
@@ -42,46 +44,68 @@ class CreateAppt extends Component {
       })
   }
 
+  handleDateChange = (date) => this.setState({ apptInfo: {date} })
+
+  handleInputChange = (event) => {
+    let apptInfoCopy = { ...this.state.apptInfo }
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+    apptInfoCopy = { ...apptInfoCopy, [event.target.name]: value }
+    this.setState({ apptInfo: apptInfoCopy })
+  }
+
   componentDidMount = () => {
     this.getPacks()
     this.getSalonInfo()
   }
 
   render() {
-    console.log(this.state.packs)
     return (
       <section>
         <h1>Pedir cita en {this.state.salonInfo.name}</h1>
         <Form>
           <h2>Elige un pack de servicios</h2>
-          {this.state.packs &&
-            this.state.packs.map((elm) => (
-              <Form.Group as='article' key={elm._id} className='packCard'>
-                <Form.Label>
-                  <Form.Check
-                    type='radio'
-                    name='services'
-                    id={`services${elm._id}`}
-                    value={elm._id}
-                  />
-                  {elm.services.map((elm) => (
-                    <p key={elm._id}>{elm.name}</p>
-                  ))}
-                </Form.Label>
-                <p className='price'>{elm.price} € </p>
-              </Form.Group>
-            ))}
+          <Form.Group onChange={this.handleInputChange}>
+            {this.state.packs &&
+              this.state.packs.map((elm) => (
+                <article key={elm._id} className='packCard'>
+                  <Form.Label>
+                    <Form.Check
+                      type='radio'
+                      name='services'
+                      id={`services${elm._id}`}
+                      value={elm._id}
+                    />
+                    {elm.services.map((elm) => (
+                      <p key={elm._id}>{elm.name}</p>
+                    ))}
+                  </Form.Label>
+                  <p className='price'>{elm.price} € </p>
+                </article>
+              ))}
+          </Form.Group>
           <h2>Elige fecha y hora</h2>
-          <p className="datetime-rec">Te recomendamos introducir varias fechas alternativas</p>
+          <p className='datetime-rec'>Te recomendamos introducir varias fechas alternativas</p>
           <Form.Group as='article'>
-            <DateTimePicker className='date' />
+            <DateTimePicker
+              className='date'
+              onChange={this.handleDateChange}
+              value={this.state.apptInfo.date}
+            />
+          </Form.Group>
+          {/* <Form.Group as='article'>
+            <DateTimePicker
+              className='date'
+              onChange={this.handleDateChange}
+              value={this.state.apptInfo.date2}
+            />
           </Form.Group>
           <Form.Group as='article'>
-            <DateTimePicker className='date' />
-          </Form.Group>
-          <Form.Group as='article'>
-            <DateTimePicker className='date' />
-          </Form.Group>
+            <DateTimePicker
+              className='date'
+              onChange={this.handleDateChange}
+              value={this.state.apptInfo.date3}
+            />
+          </Form.Group> */}
           <Button size='lg' block='true' className='red-button' type='submit'>
             Crear
           </Button>
