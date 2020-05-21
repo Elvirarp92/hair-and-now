@@ -33,6 +33,14 @@ router.get('/getuserappts/:id', (req, res, next) => {
 
 router.get('/getappt/:id', (req, res, next) => {
   Appointment.findById(req.params.id)
+    .populate({
+      path: 'services',
+      model: 'Pack',
+      populate: {
+        path: 'services',
+        model: 'Service',
+      },
+    })
     .then((appointment) => {
       res.json(appointment)
     })
@@ -92,7 +100,7 @@ router.post('/editappt/:id', checkLoggedIn, (req, res, next) => {
   Appointment.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((appointment) => {
       if (appointment.validated) {
-        if ((appointment.dates.length >= 1)) {
+        if (appointment.dates.length >= 1) {
           transporter.sendMail({
             from: process.env.EMAIL,
             to: [appointment.clientEmail, req.user.email],
@@ -116,7 +124,6 @@ router.post('/editappt/:id', checkLoggedIn, (req, res, next) => {
       }
 
       return appointment
-
     })
     .then((appointment) => res.json(appointment))
     .catch((err) => {
