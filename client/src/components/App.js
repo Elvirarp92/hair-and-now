@@ -7,6 +7,7 @@ import LightNavbar from './ui/lightNavbar/lightNavbar'
 import Home from './pages/home/home'
 import ProDashboard from './pages/proDashboard/proDashboard'
 import CreateAppt from './pages/createAppt/createAppt'
+import EditAppt from './pages/editAppt/editAppt'
 import CreateSalon from './pages/createSalon/createSalon'
 import PackForm from './pages/packForm/packForm'
 import SalonDetails from './pages/salonDetails/salonDetails'
@@ -47,6 +48,7 @@ class App extends Component {
             path='/appointment/create/:salonId'
             render={(props) => <CreateAppt {...props} />}
           />
+          <Route path='/appointment/edit/:id' render={(props) => <EditAppt {...props} />} />
           <Route
             path='/packs/create/:salonId'
             render={(props) => <PackForm {...props} loggedInUser={this.state.loggedInUser} />}

@@ -11,5 +11,16 @@ h2 {
 }
 
 p {
-  text-align: center;
+  text-align: left;
+  margin: 0px;
+}
+
+.service-container {
+  margin: 12px 4px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.price {
+  text-align: right;
 }

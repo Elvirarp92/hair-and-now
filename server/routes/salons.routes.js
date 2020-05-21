@@ -6,8 +6,22 @@ const { checkLoggedIn, checkRole } = require('./../configs/authCheckers.config')
 const Salon = require('./../models/salon.model')
 
 //READ
+/* (need specific route for querying salons for management, which needs 
+  all this deep population to work properly) */
 router.get('/getsalons/search', (req, res, next) => {
   Salon.find(req.query)
+    .populate({
+      path: 'appointments',
+      model: 'Appointment',
+      populate: {
+        path: 'services',
+        model: 'Pack',
+        populate: {
+          path: 'services',
+          model: 'Service',
+        },
+      },
+    })
     .then((salons) => {
       res.json(salons)
     })
