@@ -7,7 +7,6 @@ import SalonCard from './salonCard/salonCard'
 
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
 
 import './proDashboard.css'
 

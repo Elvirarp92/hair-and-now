@@ -1,0 +1,15 @@
+/* #d62828; */
+
+article {
+  border: 3px solid #003049;
+  margin: 4px 0px;
+  border-radius: 0.25rem;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+p {
+  text-align: center;
+}
