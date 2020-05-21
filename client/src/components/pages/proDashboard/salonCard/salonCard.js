@@ -10,22 +10,24 @@ const SalonCard = (props) => {
     <article>
       <h2>{props.salon.name}</h2>
       {props.salon.appointments.length > 0 ? (
-        props.salon.appointments.map((elm, idx) => (
-          <div key={idx} className='is-flex service-container'>
-            <div>
-              {elm.services[0].services.map((elm, idx) => (
-                <p key={idx}>{elm.name}</p>
-              ))}
-              <hr />
-              {elm.dates.map((elm, idx) => (
-                <p key={idx}>{elm.toLocaleString()}</p>
-              ))}
+        props.salon.appointments.map((elm, idx) =>
+          elm.validated ? null : (
+            <div key={idx} className='is-flex service-container'>
+              <div>
+                {elm.services[0].services.map((elm, idx) => (
+                  <p key={idx}>{elm.name}</p>
+                ))}
+                <hr />
+                {elm.dates.map((elm, idx) => (
+                  <p key={idx}>{elm.toLocaleString()}</p>
+                ))}
+              </div>
+              <Link to={`/appointment/edit/${elm._id}`}>
+                <Button className='red-button'>Gestionar cita</Button>
+              </Link>
             </div>
-            <Link to={`/appointment/edit/${elm._id}`}>
-              <Button className='red-button'>Gestionar cita</Button>
-            </Link>
-          </div>
-        ))
+          )
+        )
       ) : (
         <p>No tienes citas pendientes de gestión</p>
       )}
