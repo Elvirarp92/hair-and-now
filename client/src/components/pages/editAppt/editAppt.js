@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { registerLocale } from 'react-datepicker'
-import es from 'date-fns/locale/es'
 
 import AppointmentService from './../../../services/appointments.services'
 
@@ -9,12 +7,12 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 
-registerLocale('es', es)
-
 class EditAppt extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      markForDeletion: {},
+    }
     this.appointmentService = new AppointmentService()
   }
 
@@ -23,9 +21,26 @@ class EditAppt extends Component {
       .getAppt(this.props.match.params.id)
       .then((response) => {
         const appt = response.data
-        appt.dates = appt.dates.map(elm => new Date(Date.parse(elm)))
-        this.setState({ appointment: appt })})
+        appt.dates = appt.dates.map((elm) => new Date(Date.parse(elm)))
+        this.setState({ appointment: appt })
+      })
       .catch((err) => console.log(err))
+  }
+
+  markForDeletion = (event) => {
+    const check = event.target.checked
+    let markForDeletionCopy = { ...this.state.markForDeletion }
+    markForDeletionCopy = { ...markForDeletionCopy, [event.target.name]: check }
+    this.setState({ markForDeletion: markForDeletionCopy })
+  }
+
+  removeDates = (event) => {
+    event.preventDefault()
+    console.log(event)
+    const apptCopy = { ...this.state.appointment }
+    const markedForDeletion = Object.entries(this.state.markForDeletion)
+    markedForDeletion.map((elm) => (elm[1] ? apptCopy.dates.splice(elm[0]) : null))
+    this.setState({ appointment: apptCopy })
   }
 
   componentDidMount = () => this.getAppt()
@@ -38,8 +53,19 @@ class EditAppt extends Component {
           Elimina todas las fechas que no interesen, o todas si ninguna encaja, y dale a enviar para
           informar al usuario.
         </p>
-        {this.state.appointment &&
-          this.state.appointment.dates.map((elm, idx) => <p key={idx}>{elm.toLocaleString()}</p>)}
+        <Form onSubmit={this.removeDates}>
+          {this.state.appointment &&
+            this.state.appointment.dates.map((elm, idx) => (
+              <Form.Group key={idx} className='is-flex'>
+                <Form.Label>{elm.toLocaleString('es-ES')}</Form.Label>
+                <Form.Check type='checkbox' name={idx} onChange={this.markForDeletion} />
+              </Form.Group>
+            ))}
+          <Button type='submit' size='lg' block='true' className='red-button'>
+            Eliminar fechas seleccionadas
+          </Button>
+        </Form>
+        {this.state.appointment && this.state.appointment.dates.length <= 1 && <p>hewwo</p>}
       </Container>
     )
   }
