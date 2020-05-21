@@ -5,7 +5,7 @@ const appointmentSchema = new Schema(
   {
     services: { type: [Schema.Types.ObjectId], ref: 'Pack' },
     dates: { type: [Date] },
-    estimatedEndTime: Date
+    estimatedEndTime: Date,
     validated: { type: Boolean, default: false },
     clientEmail: String
   },

@@ -19,7 +19,7 @@ const SalonCard = (props) => {
                 ))}
                 <hr />
                 {elm.dates.map((elm, idx) => (
-                  <p key={idx}>{elm.toLocaleString()}</p>
+                  <p key={idx}>{new Date(Date.parse(elm)).toLocaleString()}</p>
                 ))}
               </div>
               <Link to={`/appointment/edit/${elm._id}`}>
