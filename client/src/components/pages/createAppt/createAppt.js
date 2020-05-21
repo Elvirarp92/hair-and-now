@@ -94,7 +94,7 @@ class CreateAppt extends Component {
         <p className='datetime-rec'>Te recomendamos introducir varias fechas alternativas</p>
         {this.state.apptInfo.dates.length > 0 &&
           this.state.apptInfo.dates.map((elm, idx) => (
-            <Alert key={idx} className='date-alert'>
+            <Alert key={idx} className='alert'>
               {elm.toLocaleString()}
             </Alert>
           ))}

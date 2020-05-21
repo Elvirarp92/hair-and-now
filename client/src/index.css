@@ -35,7 +35,10 @@ h1, h2 {
   justify-content: center;
 }
 
+.alert {
+  border: 1px solid #d62828;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

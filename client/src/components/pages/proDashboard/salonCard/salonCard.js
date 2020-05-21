@@ -16,7 +16,7 @@ const SalonCard = (props) => {
         <p>No tienes citas pendientes de gestión</p>
       )}
       <nav className='is-flex is-centered'>
-        <Link to='#'>
+        <Link to={`/packs/create/${props.salon._id}`}>
           <Button className='red-button'>Gestión de servicios</Button>
         </Link>
       </nav>

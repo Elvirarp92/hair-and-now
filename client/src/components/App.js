@@ -8,6 +8,7 @@ import Home from './pages/home/home'
 import ProDashboard from './pages/proDashboard/proDashboard'
 import CreateAppt from './pages/createAppt/createAppt'
 import CreateSalon from './pages/createSalon/createSalon'
+import PackForm from './pages/packForm/packForm'
 import SalonDetails from './pages/salonDetails/salonDetails'
 import SignupForm from './pages/signupForm/signupForm'
 import LoginForm from './pages/loginForm/loginForm'
@@ -45,6 +46,10 @@ class App extends Component {
           <Route
             path='/appointment/create/:salonId'
             render={(props) => <CreateAppt {...props} />}
+          />
+          <Route
+            path='/packs/create/:salonId'
+            render={(props) => <PackForm {...props} loggedInUser={this.state.loggedInUser} />}
           />
           <Route path='/confirm/:id' render={(props) => <Confirm {...props} />} />
           <Route path='/salons/create' render={(props) => <CreateSalon {...props} />} />

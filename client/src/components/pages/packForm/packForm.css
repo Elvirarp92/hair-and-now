@@ -1,0 +1,9 @@
+.packs {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-label {
+  margin: 0px;
+  text-align: left;
+}
