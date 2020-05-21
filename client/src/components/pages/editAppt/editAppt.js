@@ -21,7 +21,12 @@ class EditAppt extends Component {
       .then((response) => {
         const appt = response.data
         appt.dates = appt.dates.map((elm) => new Date(Date.parse(elm)))
-        this.setState({ appointment: appt })
+        const minuteArray = []
+        const pack = appt.services[0]
+        pack.services.map((elm) => minuteArray.push(elm.estimatedTime))
+        //this gives us an estimated time in minutes
+        const sumTimes = minuteArray.reduce((acc, elm) => acc + elm)
+        this.setState({ appointment: appt, estimatedMinutes: sumTimes })
       })
       .catch((err) => console.log(err))
   }
@@ -46,17 +51,26 @@ class EditAppt extends Component {
 
     const apptCopy = { ...this.state.appointment }
 
+    if (apptCopy.dates.length > 0) {
+      apptCopy.estimatedEndTime = apptCopy.dates[0].setMinutes(
+        apptCopy.dates[0].getMinutes() + this.state.estimatedMinutes
+      )
+    }
+
     apptCopy.validated = true
+    
+    console.log(apptCopy)
 
     this.setState({ appointment: apptCopy })
 
-    this.appointmentService.editAppt(apptCopy, this.props.match.params.id)
-    .then((res) => {
-      this.props.history.push('/user/professionals/dashboard')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    this.appointmentService
+      .editAppt(apptCopy, this.props.match.params.id)
+      .then((res) => {
+        this.props.history.push('/user/professionals/dashboard')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   componentDidMount = () => this.getAppt()
