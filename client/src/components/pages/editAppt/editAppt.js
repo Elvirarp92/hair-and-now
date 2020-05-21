@@ -5,7 +5,6 @@ import AppointmentService from './../../../services/appointments.services'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-import Alert from 'react-bootstrap/Alert'
 
 class EditAppt extends Component {
   constructor(props) {
@@ -36,11 +35,28 @@ class EditAppt extends Component {
 
   removeDates = (event) => {
     event.preventDefault()
-    console.log(event)
     const apptCopy = { ...this.state.appointment }
     const markedForDeletion = Object.entries(this.state.markForDeletion)
-    markedForDeletion.map((elm) => (elm[1] ? apptCopy.dates.splice(elm[0]) : null))
+    markedForDeletion.map((elm) => (elm[1] ? apptCopy.dates.splice(elm[0], 1) : null))
     this.setState({ appointment: apptCopy })
+  }
+
+  validateDates = (event) => {
+    event.preventDefault()
+
+    const apptCopy = { ...this.state.appointment }
+
+    apptCopy.validated = true
+
+    this.setState({ appointment: apptCopy })
+
+    this.appointmentService.editAppt(apptCopy, this.props.match.params.id)
+    .then((res) => {
+      this.props.history.push('/user/professionals/dashboard')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   componentDidMount = () => this.getAppt()
@@ -65,7 +81,13 @@ class EditAppt extends Component {
             Eliminar fechas seleccionadas
           </Button>
         </Form>
-        {this.state.appointment && this.state.appointment.dates.length <= 1 && <p>hewwo</p>}
+        {this.state.appointment && this.state.appointment.dates.length <= 1 && (
+          <Form onSubmit={this.validateDates}>
+            <Button type='submit' size='lg' block='true' className='red-button'>
+              Validar
+            </Button>
+          </Form>
+        )}
       </Container>
     )
   }

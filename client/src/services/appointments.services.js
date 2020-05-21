@@ -15,7 +15,7 @@ export default class services {
   postNewAppt = ({ services, dates }, salonId) =>
     this.service.post(`/postnewappt/${salonId}`, { services, dates })
 
-  editAppt = ({ services, dates }, id) => this.service.post(`/editappt/${id}`, { services, dates })
+  editAppt = ({ services, dates, validated}, id) => this.service.post(`/editappt/${id}`, { services, dates, validated })
 
   deleteAppt = (id) => this.service.post(`/deleteappt/${id}`)
 }

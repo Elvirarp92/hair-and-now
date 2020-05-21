@@ -6,6 +6,7 @@ const appointmentSchema = new Schema(
     services: { type: [Schema.Types.ObjectId], ref: 'Pack' },
     dates: { type: [Date] },
     validated: { type: Boolean, default: false },
+    clientEmail: String
   },
   { timestamps: true }
 )
