@@ -22,22 +22,14 @@ router.get('/getsalons/search', (req, res, next) => {
         },
       },
     })
-    .then((salons) => {
-      res.json(salons)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then((salons) => res.json(salons))
+    .catch((err) => next(new Error(err)))
 })
 
 router.get('/getsalon/:id', (req, res, next) => {
   Salon.findById(req.params.id)
-    .then((salon) => {
-      res.json(salon)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then((salon) => res.json(salon))
+    .catch((err) => next(new Error(err)))
 })
 
 //CREATE
@@ -53,12 +45,8 @@ router.post('/postnewsalon', checkRole(['professional']), (req, res, next) => {
   }
 
   Salon.create(newSalon)
-    .then((salon) => {
-      res.json(salon)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then((salon) => res.json(salon))
+    .catch((err) => next(new Error(err)))
 })
 
 //UPDATE
@@ -72,12 +60,8 @@ router.post('/editsalon/:id', checkLoggedIn, (req, res, next) => {
           })
     )
     .then((salonId) => Salon.findByIdAndUpdate(salonId, req.body, { new: true }))
-    .then((salon) => {
-      res.json(salon)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then((salon) => res.json(salon))
+    .catch((err) => next(new Error(err)))
 })
 
 //DELETE
@@ -91,12 +75,8 @@ router.post('/deletesalon/:id', checkLoggedIn, (req, res, next) => {
           })
     )
     .then((salonId) => Salon.findByIdAndDelete(salonId))
-    .then(() => {
-      res.json({ message: `Salon document ${req.params.id} deleted!` })
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then(() => res.json({ message: `Salon document ${req.params.id} deleted!` }))
+    .catch((err) => next(new Error(err)))
 })
 
 module.exports = router

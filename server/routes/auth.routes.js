@@ -33,8 +33,7 @@ router.post('/signup', (req, res, next) => {
 
   if (password.length < 8) {
     res.status(400).json({
-      message:
-        'Please make your password at least 8 characters long for security purposes.',
+      message: 'Please make your password at least 8 characters long for security purposes.',
     })
     return
   }
@@ -46,9 +45,7 @@ router.post('/signup', (req, res, next) => {
     }
 
     if (foundUser) {
-      res
-        .status(400)
-        .json({ message: 'Username or email taken. Choose another one(s).' })
+      res.status(400).json({ message: 'Username or email taken. Choose another one(s).' })
       return
     }
 
@@ -92,23 +89,14 @@ router.post('/signup', (req, res, next) => {
           })
         }
       })
-      .then((user) => {
-        res.status(200).json(user)
-        return
-      })
-      .catch((err) => {
-        res.status(400).json({ message: 'Saving user to database went wrong.' })
-        return
-      })
+      .then((user) => res.status(200).json(user))
+      .catch((err) => res.status(400).json({ message: 'Saving user to database went wrong.' }))
   })
 })
 
 //User confirmation
 router.get('/confirm/:confirmCode', (req, res, next) => {
-  User.findOneAndUpdate(
-    { confirmationCode: req.params.confirmCode },
-    { status: 'active' }
-  )
+  User.findOneAndUpdate({ confirmationCode: req.params.confirmCode }, { status: 'active' })
     .then((user) => {
       req.login(user, (err) => {
         if (err) {
@@ -119,19 +107,15 @@ router.get('/confirm/:confirmCode', (req, res, next) => {
         res.status(200).json(user)
       })
     })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Something went wrong while updating the user.' })
-    })
+    .catch((err) =>
+      res.status(500).json({ message: 'Something went wrong while updating the user.' })
+    )
 })
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, failureDetails) => {
     if (err) {
-      res
-        .status(500)
-        .json({ message: 'Something went wrong on user authentication.' })
+      res.status(500).json({ message: 'Something went wrong on user authentication.' })
       return
     }
     if (!user) {

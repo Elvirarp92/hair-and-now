@@ -30,12 +30,8 @@ let transporter = nodemailer.createTransport({
 //READ
 router.get('/getuserappts/:id', (req, res, next) => {
   User.findById(req.params.id)
-    .then((client) => {
-      res.json(client.appointments)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then((client) => res.json(client.appointments))
+    .catch((err) => next(new Error(err)))
 })
 
 router.get('/getappt/:id', (req, res, next) => {
@@ -48,12 +44,8 @@ router.get('/getappt/:id', (req, res, next) => {
         model: 'Service',
       },
     })
-    .then((appointment) => {
-      res.json(appointment)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then((appointment) => res.json(appointment))
+    .catch((err) => next(new Error(err)))
 })
 
 //CREATE
@@ -92,16 +84,14 @@ router.post('/editappt/:id', checkLoggedIn, (req, res, next) => {
         })
   } else if (req.user.role == 'professional') {
     Salon.findOne({ owner: req.user._id })
-      .then((salon) => {
+      .then((salon) =>
         salon && salon.appointments.includes(req.params.id)
           ? (salonName = salon.name)
           : res.status(403).json({
               message: `You do not have permissions to edit this appointment`,
             })
-      })
-      .catch((err) => {
-        next(new Error(err))
-      })
+      )
+      .catch((err) => next(new Error(err)))
   }
 
   Appointment.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -145,9 +135,7 @@ router.post('/editappt/:id', checkLoggedIn, (req, res, next) => {
       return appointment
     })
     .then((appointment) => res.json(appointment))
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .catch((err) => next(new Error(err)))
 })
 
 //DELETE
@@ -160,25 +148,19 @@ router.post('/deleteappt/:id', checkLoggedIn, (req, res, next) => {
         })
   } else if (req.user.role == 'professional') {
     Salon.findOne({ owner: req.user.role })
-      .then((salon) => {
+      .then((salon) =>
         salon && salon.appointments.includes(req.params.id)
           ? null
           : res.status(403).json({
               message: `You do not have permissions to delete this appointment`,
             })
-      })
-      .catch((err) => {
-        next(new Error(err))
-      })
+      )
+      .catch((err) => next(new Error(err)))
   }
 
   Appointment.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.json({ message: `Appointment document ${req.params.id} deleted!` })
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then(() => res.json({ message: `Appointment document ${req.params.id} deleted!` }))
+    .catch((err) => next(new Error(err)))
 })
 
 module.exports = router

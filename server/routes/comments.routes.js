@@ -8,12 +8,8 @@ const { checkLoggedIn } = require('./../configs/authCheckers.config')
 //READ
 router.get('/getcomments/:id', (req, res, next) => {
   Comment.find({ postedIn: req.params.id })
-    .then((comments) => {
-      res.json(comments)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then((comments) => res.json(comments))
+    .catch((err) => next(new Error(err)))
 })
 
 //CREATE
@@ -26,12 +22,8 @@ router.post('/postnewcomment/:id', checkLoggedIn, (req, res, next) => {
   }
 
   Comment.create(commentBody)
-    .then((comment) => {
-      res.json(comment)
-    })
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .then((comment) => res.json(comment))
+    .catch((err) => next(new Error(err)))
 })
 
 //UPDATE
@@ -42,20 +34,16 @@ router.post('/postnewcomment/:id', checkLoggedIn, (req, res, next) => {
 //DELETE
 router.post('/deletecomment/:id', checkLoggedIn, (req, res, next) => {
   Comment.findById(req.params.id)
-    .then((comment) => {
-      return comment.owner == req.user.id
+    .then((comment) =>
+      comment.owner == req.user.id
         ? comment._id
         : res.status(403).json({
             message: `You do not have permissions to delete this comment`,
           })
-    })
-    .then((commentId) => {
-      return Comment.findByIdAndDelete(commentId)
-    })
+    )
+    .then((commentId) => Comment.findByIdAndDelete(commentId))
     .then(() => res.status(200).json({ message: 'Deletion was successful!' }))
-    .catch((err) => {
-      next(new Error(err))
-    })
+    .catch((err) => next(new Error(err)))
 })
 
 module.exports = router
