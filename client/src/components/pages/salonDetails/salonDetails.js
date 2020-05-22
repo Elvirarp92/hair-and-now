@@ -47,10 +47,7 @@ class SalonDetails extends Component {
           </Col>
         </Row>
         {/* placeholder */}
-        <img
-          src='https://images.unsplash.com/photo-1534778356534-d3d45b6df1da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
-          alt={this.state.name}
-        />
+        <img src={`${process.env.PUBLIC_URL}/img/barber-seats-mirrors.jpg`} alt={this.state.name} />
         {this.state.address && (
           <p>{`${this.state.address.street}, ${this.state.address.number}, ${this.state.address.zipcode} ${this.state.address.town} (${this.state.address.province})`}</p>
         )}
