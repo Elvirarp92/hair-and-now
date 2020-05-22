@@ -47,7 +47,7 @@ class SalonDetails extends Component {
           </Col>
         </Row>
         {/* placeholder */}
-        <img src={`${process.env.PUBLIC_URL}/img/barber-seats-mirrors.jpg`} alt={this.state.name} />
+        <img src={`${process.env.PUBLIC_URL}/static/img/barber-seats-mirrors.jpg`} alt={this.state.name} />
         {this.state.address && (
           <p>{`${this.state.address.street}, ${this.state.address.number}, ${this.state.address.zipcode} ${this.state.address.town} (${this.state.address.province})`}</p>
         )}
