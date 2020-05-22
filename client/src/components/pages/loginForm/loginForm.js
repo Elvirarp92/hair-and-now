@@ -31,44 +31,37 @@ class LoginForm extends Component {
         this.props.setTheUser(res.data)
         this.props.history.push('/')
       })
-      .catch((err) => {
-        err.response.status === 400 &&
-          this.setState({ errorMessage: err.response.data.message })
-      })
+      .catch((err) => console.log(err))
   }
 
   render() {
     return (
       <Container>
         <h1>Inicio de sesión</h1>
-        <Row className="form-margin" className="is-flex is-centered">
+        <Row className='form-margin' className='is-flex is-centered'>
           <Col xs={10}>
             <Form onSubmit={this.handleSubmit}>
-              <Form.Group controlId="username">
+              <Form.Group controlId='username'>
                 <Form.Label>Nombre de usuario</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Usuario"
-                  name="username"
+                  type='text'
+                  placeholder='Usuario'
+                  name='username'
                   value={this.state.username}
                   onChange={this.handleInputChange}
                 />
               </Form.Group>
-              <Form.Group controlId="password">
+              <Form.Group controlId='password'>
                 <Form.Label>Contraseña</Form.Label>
                 <Form.Control
-                  type="password"
-                  name="password"
-                  placeholder="Contraseña"
+                  type='password'
+                  name='password'
+                  placeholder='Contraseña'
                   value={this.state.password}
                   onChange={this.handleInputChange}
                 />
               </Form.Group>
-              <Button
-                size="lg"
-                block="true"
-                className="red-button"
-                type="submit">
+              <Button size='lg' block='true' className='red-button' type='submit'>
                 Registrar
               </Button>
             </Form>

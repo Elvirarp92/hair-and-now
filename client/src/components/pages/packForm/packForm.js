@@ -67,7 +67,6 @@ class PackForm extends Component {
       this.setState({ hasServices: hasServicesCopy })
     } else if (event.target.type === 'number') {
       let packObjCopy = { ...this.state.packObj }
-      console.log(packObjCopy)
       packObjCopy = { ...packObjCopy, [event.target.name]: Number(value) }
       this.setState({ packObj: packObjCopy })
     }

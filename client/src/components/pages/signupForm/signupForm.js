@@ -38,9 +38,7 @@ class SignupForm extends Component {
           ? this.props.history.push('/')
           : this.props.history.push('/salons/create')
       )
-      .catch((err) => {
-        err.response.status === 400 && this.setState({ errorMessage: err.response.data.message })
-      })
+      .catch((err) => console.log(err))
   }
 
   render() {

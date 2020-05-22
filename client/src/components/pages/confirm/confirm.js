@@ -19,32 +19,21 @@ class Confirm extends Component {
     const { id } = this.props.match.params
     this.authService
       .confirm(id)
-      .then((data) => {
-        this.setState({ confirming: false })
-      })
-      .catch((err) => {
-        err.response.status === 400 &&
-          this.setState({ errorMessage: err.response.data.message })
-      })
+      .then((data) => this.setState({ confirming: false }))
+      .catch((err) => console.log(err))
   }
 
   render() {
     return (
       <main>
         {this.state.confirming ? (
-          <Button size="lg" block="true" className="red-button" disabled>
-            <Spinner
-              as="span"
-              animation="grow"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-            />
+          <Button size='lg' block='true' className='red-button' disabled>
+            <Spinner as='span' animation='grow' size='sm' role='status' aria-hidden='true' />
             Confirmando...
           </Button>
         ) : (
-          <Link to="/">
-            <Button size="lg" block="true" className="red-button">
+          <Link to='/'>
+            <Button size='lg' block='true' className='red-button'>
               Volver a Inicio
             </Button>
           </Link>

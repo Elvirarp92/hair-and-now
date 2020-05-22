@@ -45,12 +45,8 @@ class CreateAppt extends Component {
     const id = this.props.match.params.salonId
     this.salonService
       .getSalon(id)
-      .then((response) => {
-        this.setState({ salonInfo: response.data })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((response) => this.setState({ salonInfo: response.data }))
+      .catch((err) => console.log(err))
   }
 
   handleDateChange = (date) => this.setState({ dateManager: date })
@@ -73,12 +69,8 @@ class CreateAppt extends Component {
     event.preventDefault()
     this.appointmentService
       .postNewAppt(this.state.apptInfo, this.props.match.params.salonId)
-      .then((res) => {
-        this.props.history.push('/')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this.props.history.push(`/salons/${this.props.match.params.salonId}`))
+      .catch((err) => console.log(err))
   }
 
   componentDidMount = () => {

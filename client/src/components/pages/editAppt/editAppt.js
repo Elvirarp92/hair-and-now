@@ -63,12 +63,8 @@ class EditAppt extends Component {
 
     this.appointmentService
       .editAppt(apptCopy, this.props.match.params.id)
-      .then((res) => {
-        this.props.history.push('/user/professionals/dashboard')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this.props.history.push('/user/professionals/dashboard'))
+      .catch((err) => console.log(err))
   }
 
   componentDidMount = () => this.getAppt()

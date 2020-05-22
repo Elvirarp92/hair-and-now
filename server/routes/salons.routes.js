@@ -57,7 +57,6 @@ router.post('/postnewsalon', checkRole(['professional']), (req, res, next) => {
       res.json(salon)
     })
     .catch((err) => {
-      console.log(err)
       next(new Error(err))
     })
 })

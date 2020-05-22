@@ -108,12 +108,8 @@ class CreateSalon extends Component {
 
     this.salonService
       .createSalon(salon)
-      .then((res) => {
-        this.props.history.push('/')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this.props.history.push('/'))
+      .catch((err) => console.log(err))
   }
 
   render() {
@@ -158,14 +154,7 @@ class CreateSalon extends Component {
                   id='type2'
                   value='peluquería de señoras'
                 />
-                <Form.Check
-                  inline
-                  type='radio'
-                  label='Otro'
-                  name='type'
-                  id='type4'
-                  value='otro'
-                />
+                <Form.Check inline type='radio' label='Otro' name='type' id='type4' value='otro' />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Calle/Plaza/Avenida</Form.Label>

@@ -39,7 +39,7 @@ class LightNavbar extends Component {
               </>
             )}
             {this.props.loggedInUser && this.props.loggedInUser.role === 'client' ? (
-              <Nav.Link href='#'>Reservas</Nav.Link>
+              {/* <Nav.Link href='#'>Reservas</Nav.Link> */}
             ) : null}
             {this.props.loggedInUser && this.props.loggedInUser.role === 'professional' ? (
               <Nav.Link href='/user/professionals/dashboard'>Gestión</Nav.Link>
