@@ -34,7 +34,7 @@ class SignupForm extends Component {
     this.authService
       .signup(this.state.signupInfo)
       .then(() =>
-        this.state.signupInfo.role == 'client'
+        this.state.signupInfo.role === 'client'
           ? this.props.history.push('/')
           : this.props.history.push('/salons/create')
       )

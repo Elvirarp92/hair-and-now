@@ -38,7 +38,7 @@ class LoginForm extends Component {
     return (
       <Container>
         <h1>Inicio de sesión</h1>
-        <Row className='form-margin' className='is-flex is-centered'>
+        <Row className='form-margin is-flex is-centered'>
           <Col xs={10}>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId='username'>
