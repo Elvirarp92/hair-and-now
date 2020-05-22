@@ -1,0 +1,12 @@
+a {
+  text-decoration: none;
+  color: #212529;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color: #d62828;
+  text-decoration: underline;
+}
+

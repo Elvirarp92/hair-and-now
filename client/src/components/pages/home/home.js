@@ -16,8 +16,8 @@ import SalonService from './../../../services/salons.services'
 import './home.css'
 
 class Home extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       salons: [],
     }
@@ -44,7 +44,7 @@ class Home extends Component {
             <SalonList salons={this.state.salons} />
           </Col>
           <Col xs={12} s={12} m={6}>
-            <Accordion>
+            {/* <Accordion>
               <Card>
                 <Accordion.Toggle as={Card.Header} eventKey='0'>
                   Búsqueda avanzada
@@ -56,13 +56,17 @@ class Home extends Component {
             </Accordion>
             <Button size='lg' block='true' className='red-button'>
               Buscar
-            </Button>
-            <p className='pro-cta'>¿Profesional? Anúnciate con nosotros</p>
-            <Link to='/signup'>
-              <Button size='lg' block='true' className='red-button'>
-                Regístrate
-              </Button>
-            </Link>
+            </Button> */}
+            {!this.props.loggedInUser && (
+              <div>
+                <p className='pro-cta'>¿Profesional? Anúnciate con nosotros</p>
+                <Link to='/signup'>
+                  <Button size='lg' block='true' className='red-button'>
+                    Regístrate
+                  </Button>
+                </Link>
+              </div>
+            )}
           </Col>
         </Row>
       </Container>

@@ -1,17 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
+
+import './salonList.css'
+
 const SalonList = (props) => {
   return (
-    <section>
-      {props.salons.map((elm) => (
-        <p key={elm._id}>
-          <Link to={`/salons/${elm._id}`}>
-            {elm.name}
+    <Card as='section' style={{ width: '18rem' }}>
+      <ListGroup variant='flush'>
+        {props.salons.map((elm) => (
+          <Link key={elm._id} to={`/salons/${elm._id}`}>
+            <ListGroup.Item className='salon-card'>{elm.name}</ListGroup.Item>
           </Link>
-        </p>
-      ))}
-    </section>
+        ))}
+      </ListGroup>
+    </Card>
   )
 }
 

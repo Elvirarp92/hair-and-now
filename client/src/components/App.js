@@ -67,7 +67,7 @@ class App extends Component {
             path='/login'
             render={(props) => <LoginForm {...props} setTheUser={this.setTheUser} />}
           />
-          <Route path='/' render={() => <Home />} />
+          <Route path='/' render={(props) => <Home {...props} loggedInUser={this.state.loggedInUser} />} />
         </Switch>
       </>
     )
