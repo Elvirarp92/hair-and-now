@@ -1,10 +1,17 @@
 const express = require('express')
 const router = express.Router()
 const nodemailer = require('nodemailer')
+const ical = require('ical-generator')
 
 const Appointment = require('./../models/appointment.model')
 const User = require('./../models/user.model')
 const Salon = require('./../models/salon.model')
+const cal = ical({
+  domain: 'hair-and-now.herokuapp.com',
+  name: 'Cita peluquería',
+  organizer: 'Hair & Now',
+  timezone: 'Europe/Berlin',
+})
 
 const { checkLoggedIn, checkRole } = require('./../configs/authCheckers.config')
 
@@ -101,6 +108,13 @@ router.post('/editappt/:id', checkLoggedIn, (req, res, next) => {
     .then((appointment) => {
       if (appointment.validated) {
         if (appointment.dates.length >= 1) {
+          cal.createEvent({
+            start: appointment.dates[0],
+            end: appointment.estimatedEndTime,
+            summary: 'Cita peluquería',
+            prodId: appointment._id,
+          })
+
           transporter.sendMail({
             from: process.env.EMAIL,
             to: [appointment.clientEmail, req.user.email],
@@ -111,6 +125,11 @@ router.post('/editappt/:id', checkLoggedIn, (req, res, next) => {
             html: `<p>Tu cita en ${salonName} ha sido confirmada para la siguiente fecha: ${appointment.dates[0].toLocaleString(
               'es-ES'
             )}</p>`,
+            icalEvent: {
+              filename: 'appointment.ics',
+              method: 'request',
+              content: cal.toString(),
+            },
           })
         } else if ((appointment.dates.length = 0)) {
           transporter.sendMail({

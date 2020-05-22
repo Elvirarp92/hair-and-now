@@ -58,8 +58,6 @@ class EditAppt extends Component {
     }
 
     apptCopy.validated = true
-    
-    console.log(apptCopy)
 
     this.setState({ appointment: apptCopy })
 
