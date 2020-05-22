@@ -87,7 +87,7 @@ class CreateAppt extends Component {
         {this.state.apptInfo.dates.length > 0 &&
           this.state.apptInfo.dates.map((elm, idx) => (
             <Alert key={idx} className='alert'>
-              {elm.toLocaleString()}
+              {elm.toLocaleString('es-ES')}
             </Alert>
           ))}
 
