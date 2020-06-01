@@ -1,6 +1,14 @@
 # Hair & Now
 A web browser appointment scheduling app for salons, hairdressers and barbers. MERN based. 
 
+## Next steps
+
+- Improve usability with feedback for failed attempts at filling out forms
+- Create route for rating salons as a client, and associated form
+- Implement geolocation system
+- Implement search system
+- Implement comment system
+
 ## API endpoints
 
 ### Authorization/Authentication
@@ -41,6 +49,18 @@ A web browser appointment scheduling app for salons, hairdressers and barbers. M
 | POST       | /api/postnewpost/:salonId      | Creates a new post, associated to a specific salon    |
 | POST       | /api/editpost/:id              | Updates an existing post                              |
 | POST       | /api/deletepost/:postId        | Deletes an existing post                              |
+### Services
+| **Method** | **Route**             | **Description**                                                   |
+|------------|-----------------------|-------------------------------------------------------------------|
+| GET        | /getservices          | Retrieves all listed services (used in creation of service packs) |
+### Packs
+| **Method** | **Route**             | **Description**                                     |
+|------------|-----------------------|-----------------------------------------------------|
+| GET        | /getpacks/:salonId    | Retrieves all service packs from a salon            |
+| GET        | /getpack/:id          | Retrieves a pack by ID                              |
+| POST       | /postnewpack/:salonId | Creates a service pack and associates it to a salon |
+| POST       | /editpack/:id         | Retrieves a pack by ID and edits it                 |
+| POST       | /deletepack/:id       | Deletes a specified pack                            |
 
 ## Client routes
 | **Route**   | **Description**                                                                                    |
