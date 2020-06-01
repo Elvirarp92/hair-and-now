@@ -63,10 +63,13 @@ A web browser appointment scheduling app for salons, hairdressers and barbers. M
 | POST       | /deletepack/:id       | Deletes a specified pack                            |
 
 ## Client routes
-| **Route**   | **Description**                                                                                    |
-|-------------|----------------------------------------------------------------------------------------------------|
-| /salons     | Map with closest salons + search form                                                              |
-| /salons/:id | Detail view of a specific salon. Includes ratings module, comments and appointment scheduling form |
-| /signup     | User creation form                                                                                 |
-| /login      | Login form                                                                                         |
-| /dashboard  | Access to dashboard: appointment validation, salon detail edition (for professional accounts), etc.|
+| **Route**                     | **Description**                                                                                     |
+|-------------------------------|-----------------------------------------------------------------------------------------------------|
+| /salons                       | Map with closest salons + search form                                                               |
+| /salons/:id                   | Detail view of a specific salon. Includes ratings module, comments and appointment scheduling form  |
+| /signup                       | User creation form                                                                                  |
+| /login                        | Login form                                                                                          |
+| /user/professionals/dashboard | Access to dashboard: appointment validation, salon detail edition (for professional accounts), etc. |
+| /appointment/create/:id       | Creation form for appointments                                                                      |
+| /appointment/edit/:id         | Appointment validation for professionals                                                            |
+| /packs/create                 | Service pack creation for professionals                                                             |
