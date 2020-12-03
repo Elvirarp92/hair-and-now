@@ -4,9 +4,13 @@ A web browser appointment scheduling app for salons, hairdressers and barbers. M
 ## Next steps
 
 ~~- Improve usability with feedback for failed attempts at filling out forms~~
+
 ~~- Create route for rating salons as a client, and associated form~~
+
 ~~- Implement geolocation system~~
+
 ~~- Implement search system~~
+
 ~~- Implement comment system~~
 
 A complete redo is in progress! You are invited to check [the server](https://github.com/Elvirarp92/hair-and-now-redux-server) and [the client](https://github.com/Elvirarp92/hair-and-now-redux-client) out.
